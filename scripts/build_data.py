@@ -577,20 +577,135 @@ def write_json(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[build] écrit {path} ({path.stat().st_size} bytes)")
 
+def parse_interets():
+    """Parse les DI/DIA pour top participations et activités — on a 6533 DI, riche."""
+    xml_path = RAW_DIR / "declarations.xml"
+    if not xml_path.exists():
+        return None
+    try:
+        from lxml import etree
+        from collections import Counter
+        participations = Counter()
+        remunerations = []
+        activites = Counter()
+        context = etree.iterparse(str(xml_path), events=("end",), tag="declaration", huge_tree=True)
+        total = 0
+        for _, elem in context:
+            gen = elem.find("general")
+            if gen is None:
+                elem.clear()
+                continue
+            tid = (gen.findtext("typeDeclaration/id") or "").strip()
+            if tid not in ("DI", "DIA", "DIAM", "DIM"):
+                elem.clear()
+                continue
+            total += 1
+            # participations financières
+            for p in elem.findall("participationFinanciereDto/items/items"):
+                nom = (p.findtext("nomSociete") or "").strip()
+                if nom:
+                    # filtre données non publiées
+                    if "DONN" in nom.upper() or "[" in nom:
+                        continue
+                    nom = nom.upper().strip()
+                    # normalise SCI etc mais garde distinct
+                    if len(nom) > 2:
+                        participations[nom] += 1
+            # activités 5 ans
+            for a in elem.findall("activProfCinqDerniereDto/items/items"):
+                desc = (a.findtext("description") or a.findtext("activite") or a.findtext("employeur") or "").strip()
+                if desc:
+                    if "DONN" in desc.upper() or "[" in desc:
+                        continue
+                    # normalise casse pour dédupliquer
+                    key = desc.strip()[:60]
+                    # lower pour comptage insensible casse mais garde premier libellé
+                    key_norm = key.lower()
+                    # on stocke la forme la plus fréquente via counter sur norm
+                    activites[key_norm] += 1
+                # rémunération
+                for mont in a.findall("remuneration/montant/montant"):
+                    try:
+                        v = parse_montant(mont.findtext("montant"))
+                        if v and v < 1000000:  # filtre aberrations
+                            remunerations.append(v)
+                    except:
+                        pass
+            elem.clear()
+            while elem.getprevious() is not None:
+                del elem.getparent()[0]
+            if total % 1000 == 0:
+                print(f"  ... {total} DI vues")
+        # top 15 participations
+        top_particip = [{"societe": k, "n": v} for k, v in participations.most_common(15)]
+        top_activ = [{"activite": k, "n": v} for k, v in activites.most_common(15)]
+        # stats rémunérations
+        remunerations = sorted(remunerations)
+        def pct(p):
+            if not remunerations:
+                return 0
+            idx = int(len(remunerations)*p/100)
+            return remunerations[min(idx, len(remunerations)-1)]
+        stats_rem = {
+            "n": len(remunerations),
+            "mediane": pct(50),
+            "p90": pct(90),
+            "moyenne": int(sum(remunerations)/len(remunerations)) if remunerations else 0,
+        }
+        return {
+            "total_di": total,
+            "top_participations": top_particip,
+            "top_activites": top_activ,
+            "remunerations": stats_rem,
+            "date_generation": datetime.now().strftime("%Y-%m-%d"),
+        }
+    except Exception as e:
+        print(f"[interets] erreur {e}")
+        import traceback; traceback.print_exc()
+        return None
+
 def main():
     parsed = try_parse_xml()
+    interets_data = parse_interets()
+    # sauvegarde interets même si pas de DSP
+    if interets_data:
+        for out in [OUT_DIR, SITE_DATA_DIR]:
+            out.mkdir(parents=True, exist_ok=True)
+            write_json(out / "interets.json", interets_data)
+            print(f"[build] interets.json {interets_data['total_di']} DI")
+    else:
+        print("[build] pas de données interets")
+
     if parsed is None:
         kpis, by_category, by_mandat, cohorts = mock_data()
     else:
         if isinstance(parsed, list) and len(parsed)>0 and isinstance(parsed[0], dict) and "key_hash" in parsed[0]:
-            # vrai parsing
             pairs = pair_declarations(parsed)
             print(f"[build] paires entrée/sortie: {len(pairs)}")
+            # Sauvegarde réelle même si N<10 (pour mode réel gouvernement)
+            reel_saved = False
+            if len(pairs) > 0 and len(pairs) < 10:
+                try:
+                    # On force le calcul même avec N petit pour l'onglet réel
+                    agg_reel = build_aggregates(pairs)
+                    if agg_reel:
+                        k_reel, cat_reel, mandat_reel = agg_reel
+                        for out in [OUT_DIR, SITE_DATA_DIR]:
+                            write_json(out / "kpis_reel.json", k_reel)
+                            write_json(out / "by_category_reel.json", cat_reel)
+                            write_json(out / "by_mandat_reel.json", mandat_reel)
+                            write_json(out / "cohorts_reel.json", build_cohorts(pairs))
+                        print(f"[build] reel sauvegardé N={len(pairs)} (gouvernement)")
+                        reel_saved = True
+                except Exception as e:
+                    print(f"[build] reel failed {e}")
             if len(pairs) < 10:
                 print("[build] trop peu de paires -> fallback mock enrichi")
                 kpis, by_category, by_mandat, cohorts = mock_data()
-                # on garde stats réelles en plus
                 kpis["n_paires_reel"] = len(pairs)
+                if reel_saved:
+                    kpis["has_reel"] = True
+                    kpis["reel_n"] = len(pairs)
             else:
                 agg = build_aggregates(pairs)
                 if agg is None:
@@ -601,7 +716,6 @@ def main():
         else:
             kpis, by_category, by_mandat, cohorts = mock_data()
 
-    # écriture double : /data et /site/data
     for out in [OUT_DIR, SITE_DATA_DIR]:
         out.mkdir(parents=True, exist_ok=True)
         write_json(out / "kpis.json", kpis)

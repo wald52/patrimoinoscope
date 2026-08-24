@@ -1,0 +1,134 @@
+{
+  "total_di": 6533,
+  "top_participations": [
+    {
+      "societe": "AIR LIQUIDE",
+      "n": 102
+    },
+    {
+      "societe": "CRÉDIT AGRICOLE",
+      "n": 77
+    },
+    {
+      "societe": "ENGIE",
+      "n": 76
+    },
+    {
+      "societe": "AXA",
+      "n": 73
+    },
+    {
+      "societe": "ORANGE",
+      "n": 69
+    },
+    {
+      "societe": "SANOFI",
+      "n": 63
+    },
+    {
+      "societe": "CREDIT AGRICOLE",
+      "n": 58
+    },
+    {
+      "societe": "BNP PARIBAS",
+      "n": 51
+    },
+    {
+      "societe": "AIRBUS",
+      "n": 46
+    },
+    {
+      "societe": "PERNOD RICARD",
+      "n": 37
+    },
+    {
+      "societe": "DANONE",
+      "n": 36
+    },
+    {
+      "societe": "THALES",
+      "n": 34
+    },
+    {
+      "societe": "LVMH",
+      "n": 33
+    },
+    {
+      "societe": "MICHELIN",
+      "n": 32
+    },
+    {
+      "societe": "L'OREAL",
+      "n": 31
+    }
+  ],
+  "top_activites": [
+    {
+      "activite": "avocat",
+      "n": 153
+    },
+    {
+      "activite": "collaborateur parlementaire",
+      "n": 83
+    },
+    {
+      "activite": "enseignant",
+      "n": 75
+    },
+    {
+      "activite": "formateur",
+      "n": 71
+    },
+    {
+      "activite": "chargée de mission",
+      "n": 68
+    },
+    {
+      "activite": "professeur des écoles",
+      "n": 66
+    },
+    {
+      "activite": "enseignante",
+      "n": 64
+    },
+    {
+      "activite": "président",
+      "n": 62
+    },
+    {
+      "activite": "agriculteur",
+      "n": 59
+    },
+    {
+      "activite": "exploitant agricole",
+      "n": 56
+    },
+    {
+      "activite": "chargé de mission",
+      "n": 56
+    },
+    {
+      "activite": "professeur",
+      "n": 56
+    },
+    {
+      "activite": "president",
+      "n": 54
+    },
+    {
+      "activite": "directeur",
+      "n": 53
+    },
+    {
+      "activite": "directeur de cabinet",
+      "n": 50
+    }
+  ],
+  "remunerations": {
+    "n": 27805,
+    "mediane": 25456,
+    "p90": 71118,
+    "moyenne": 35170
+  },
+  "date_generation": "2026-08-24"
+}

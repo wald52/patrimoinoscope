@@ -1,0 +1,89 @@
+[
+  {
+    "id_anon": "anon_001",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 0.6,
+    "entree_net": 235908,
+    "sortie_net": 245942,
+    "delta_net": 10034,
+    "delta_pct": 4.3,
+    "top_categorie": "epargne",
+    "top_categorie_label": "Épargne",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 1020475,
+      "valeurs_bourse": 0,
+      "assurance_vie": 7317,
+      "epargne": 7920,
+      "vehicules": 0,
+      "autres": 0
+    },
+    "repartition_sortie": {
+      "immobilier": 1020475,
+      "valeurs_bourse": 0,
+      "assurance_vie": 7323,
+      "epargne": 17948,
+      "vehicules": 0,
+      "autres": 0
+    }
+  },
+  {
+    "id_anon": "anon_002",
+    "tranche_age": "60-69 ans",
+    "type_mandat": "autre",
+    "duree_annees": 3.9,
+    "entree_net": 828503,
+    "sortie_net": 725618,
+    "delta_net": -102885,
+    "delta_pct": -12.4,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 428950,
+      "valeurs_bourse": 0,
+      "assurance_vie": 338044,
+      "epargne": 215009,
+      "vehicules": 6700,
+      "autres": 0
+    },
+    "repartition_sortie": {
+      "immobilier": 470950,
+      "valeurs_bourse": 0,
+      "assurance_vie": 139347,
+      "epargne": 88321,
+      "vehicules": 27000,
+      "autres": 0
+    }
+  },
+  {
+    "id_anon": "anon_003",
+    "tranche_age": "60-69 ans",
+    "type_mandat": "autre",
+    "duree_annees": 1.1,
+    "entree_net": 2250334,
+    "sortie_net": 1559070,
+    "delta_net": -691264,
+    "delta_pct": -30.7,
+    "top_categorie": "assurance_vie",
+    "top_categorie_label": "Assurance-vie",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 1922080,
+      "valeurs_bourse": 0,
+      "assurance_vie": 218935,
+      "epargne": 99319,
+      "vehicules": 10000,
+      "autres": 0
+    },
+    "repartition_sortie": {
+      "immobilier": 1121240,
+      "valeurs_bourse": 0,
+      "assurance_vie": 328511,
+      "epargne": 99319,
+      "vehicules": 10000,
+      "autres": 0
+    }
+  }
+]

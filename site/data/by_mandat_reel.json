@@ -1,0 +1,22 @@
+[
+  {
+    "mandat": "autre",
+    "label": "autre",
+    "n": 2,
+    "debut_moyen_net": 1539418,
+    "fin_moyenne_net": 1142344,
+    "delta_moyen_net": -397074,
+    "delta_pct": -25.8,
+    "top_categorie": "vehicules"
+  },
+  {
+    "mandat": "gouvernement",
+    "label": "gouvernement",
+    "n": 1,
+    "debut_moyen_net": 235908,
+    "fin_moyenne_net": 245942,
+    "delta_moyen_net": 10034,
+    "delta_pct": 4.3,
+    "top_categorie": "epargne"
+  }
+]

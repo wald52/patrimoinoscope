@@ -4,23 +4,30 @@ const fmtEur = n => new Intl.NumberFormat("fr-FR", { style:"currency", currency:
 const fmtPct = n => `${n>0?"+":""}${n.toFixed(1).replace(".",",")}%`;
 const fmtNum = n => new Intl.NumberFormat("fr-FR").format(n);
 
-let kpis, byCategory, byMandat, cohorts;
-let chartCat, chartMandat, chartDonut, modalChart;
+let kpis, byCategory, byMandat, cohorts, kpisReel, catReel, interets;
+let chartCat, chartMandat, chartDonut, modalChart, chartReel, chartParticip, chartActiv;
 
 async function load(){
-  const [k,bm,bc,cs] = await Promise.all([
+  const [k,bm,bc,cs, kr, cr, inter] = await Promise.all([
     fetch(`${DATA_PATH}kpis.json`).then(r=>r.json()),
     fetch(`${DATA_PATH}by_mandat.json`).then(r=>r.json()),
     fetch(`${DATA_PATH}by_category.json`).then(r=>r.json()),
     fetch(`${DATA_PATH}cohorts_sample.json`).then(r=>r.json()),
+    fetch(`${DATA_PATH}kpis_reel.json`).then(r=>r.json()).catch(()=>null),
+    fetch(`${DATA_PATH}by_category_reel.json`).then(r=>r.json()).catch(()=>null),
+    fetch(`${DATA_PATH}interets.json`).then(r=>r.json()).catch(()=>null),
   ]);
-  kpis=k; byMandat=bm; byCategory=bc; cohorts=cs;
+  kpis=k; byMandat=bm; byCategory=bc; cohorts=cs; kpisReel=kr; catReel=cr; interets=inter;
   renderHero();
   renderQuiz();
   renderCategories();
+  renderReel();
+  renderInterets();
   renderMandats();
   renderCohorts();
+  renderAuditTeaser();
   setupProgress();
+  setupOG();
 }
 
 function renderHero(){
@@ -29,15 +36,10 @@ function renderHero(){
   document.getElementById("kpi-date").textContent = kpis.date_generation;
   document.getElementById("kpi-n-paires").textContent = kpis.n_paires;
   document.getElementById("kpi-duree").textContent = kpis.duree_moyenne_annees;
-  // banner mock / limite légale
   if(kpis.mode==="mock"){
     const banner=document.getElementById("limit-banner");
     banner.style.display="block";
-    banner.innerHTML=`⚠️ Données réelles insuffisantes : <strong>${kpis.n_paires_reel ?? 3} paires</strong> appariables seulement (75 DSP téléchargeables sur ${kpis.couverture_dsp_inventaire ?? 2633} à l'inventaire). Les DSP députés/sénateurs sont <em>consultables en préfecture uniquement</em> (404) — site en <strong>mode démo</strong> avec données mock. <a href="./docs/DATA.md" style="text-decoration:underline">Voir l'audit V2</a>.`;
-  } else if(kpis.limite_legale){
-    const banner=document.getElementById("limit-banner");
-    banner.style.display="block";
-    banner.textContent=kpis.limite_legale;
+    banner.innerHTML=`⚠️ Données réelles insuffisantes : <strong>${kpis.n_paires_reel ?? 3} paires</strong> appariables seulement (75 DSP téléchargeables sur ${kpis.couverture_dsp_inventaire ?? 2633} à l'inventaire). Les DSP députés/sénateurs sont <em>consultables en préfecture uniquement</em> (404) — site en <strong>mode démo</strong> avec données mock. <a href="./audit.html" style="text-decoration:underline">Voir l'audit</a>.`;
   }
   const kpisEl = document.getElementById("kpis");
   kpisEl.innerHTML = `
@@ -70,7 +72,6 @@ function renderQuiz(){
         : `Presque ! La bonne réponse est <strong>${labels[correct] || correct}</strong> : <strong>${fmtEur(top.delta_moyen)}</strong> (${fmtPct(top.delta_pct)}). L'immobilier tire 2/3 de la hausse.`;
       result.classList.add("show");
       share.style.display="flex";
-      // confetti léger via vibration
       if(navigator.vibrate && ok) navigator.vibrate(60);
     });
   });
@@ -97,7 +98,6 @@ async function shareSite(){
   }
 }
 
-// --- Categories ---
 let catMode="euros";
 function renderCategories(){
   const ctx = document.getElementById("chart-categories");
@@ -105,16 +105,15 @@ function renderCategories(){
   const insight = document.getElementById("cat-insight");
   function dataForMode(){
     if(catMode==="pct"){
-      subtitle.textContent = "En % d'évolution (sortie vs entrée)";
+      subtitle.textContent = "En % d'évolution (sortie vs entrée) — démo";
       return byCategory.map(c=>c.delta_pct);
     } else {
-      subtitle.textContent = "En € — delta moyen par catégorie";
+      subtitle.textContent = "En € — delta moyen par catégorie (démo)";
       return byCategory.map(c=>c.delta_moyen);
     }
   }
   const labels = byCategory.map(c=>c.label);
   const contribs = byCategory.map(c=>c.contribution_pct);
-  // couleur par contribution
   const bg = contribs.map(p=> p>50? "#000091" : p>10? "#3b6cff" : "#a9b4ff");
   chartCat = new Chart(ctx, {
     type:"bar",
@@ -132,7 +131,7 @@ function renderCategories(){
       }
     }
   });
-  insight.textContent = `Lecture : ${byCategory[0].label} concentre ${byCategory[0].contribution_pct}% de la hausse totale (${fmtEur(byCategory[0].delta_moyen)}, ${fmtPct(byCategory[0].delta_pct)}). C'est 3× plus que le 2e poste (${byCategory[1].label}).`;
+  insight.textContent = `Lecture (démo) : ${byCategory[0].label} concentre ${byCategory[0].contribution_pct}% de la hausse totale (${fmtEur(byCategory[0].delta_moyen)}, ${fmtPct(byCategory[0].delta_pct)}). Réel N=3 : ${kpisReel ? fmtEur(kpisReel.delta_net_moyen) + " " + fmtPct(kpisReel.delta_net_pct) : "—"} (voir onglet Réel).`;
   document.querySelectorAll("[data-mode]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       document.querySelectorAll("[data-mode]").forEach(b=>b.classList.remove("active"));
@@ -143,41 +142,92 @@ function renderCategories(){
       chartCat.options.scales.x.ticks.callback = v=> catMode==="pct"? v+"%" : fmtEur(v);
       chartCat.options.plugins.tooltip.callbacks.label = ctx=> catMode==="pct"? fmtPct(ctx.raw): fmtEur(ctx.raw) + ` · ${contribs[ctx.dataIndex]}%`;
       chartCat.update();
-      subtitle.textContent = catMode==="pct"?"En % d'évolution":"En € — delta moyen";
     });
   });
   document.getElementById("chk-net").addEventListener("change", e=>{
-    // pour l'instant, on garde net déjà calculé ; toggle = info
     insight.textContent = e.target.checked
-      ? `Mode net (après dettes) — même hiérarchie, l'immobilier reste #1. Les dettes baissent en moyenne de ~8% sur la période (effet remboursement).`
-      : `Lecture : ${byCategory[0].label} concentre ${byCategory[0].contribution_pct}% de la hausse totale.`;
+      ? `Mode net (après dettes) — même hiérarchie, l'immobilier reste #1 en démo. Réel : patrimoine net baisse de ${kpisReel ? fmtPct(kpisReel.delta_net_pct) : "—"} sur N=3.`
+      : `Lecture (démo) : ${byCategory[0].label} concentre ${byCategory[0].contribution_pct}% de la hausse totale.`;
   });
 }
 
+function renderReel(){
+  if(!kpisReel || !catReel){
+    document.getElementById("reel-insight").textContent="Données réelles non disponibles (N<3).";
+    return;
+  }
+  document.getElementById("reel-delta").textContent=`${fmtEur(kpisReel.delta_net_moyen)} (${fmtPct(kpisReel.delta_net_pct)}) sur ${kpisReel.n_paires} paires, ${kpisReel.duree_moyenne_annees} ans`;
+  const ctx=document.getElementById("chart-reel");
+  const labels=catReel.map(c=>c.label);
+  const deltas=catReel.map(c=>c.delta_moyen);
+  const bg=deltas.map(v=> v>0? "#0a7d48" : "#E1000F");
+  chartReel=new Chart(ctx,{
+    type:"bar",
+    data:{labels, datasets:[{label:"Δ € réel", data:deltas, backgroundColor:bg, borderRadius:8}]},
+    options:{
+      indexAxis:"y", responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=> fmtEur(ctx.raw)}}},
+      scales:{x:{ticks:{callback:v=> fmtEur(v)}}, y:{grid:{display:false}}}
+    }
+  });
+  document.getElementById("reel-insight").textContent=`Sur les 3 paires gouvernementales, le patrimoine net recule de ${fmtEur(Math.abs(kpisReel.delta_net_moyen))} en moyenne, tiré par l'immobilier ${fmtEur(catReel.find(c=>c.categorie==="immobilier").delta_moyen)}. Échantillon trop petit pour généraliser — voir docs/DATA.md.`;
+  // cohorts reel
+  fetch(`${DATA_PATH}cohorts_reel.json`).then(r=>r.json()).then(cohortsReel=>{
+    const wrap=document.getElementById("reel-cohorts");
+    wrap.innerHTML=cohortsReel.map(c=>`
+      <div class="cohort" style="cursor:default">
+        <div class="id">${c.id_anon} <span class="badge-mandat mandat-${c.type_mandat}">${c.type_mandat}</span></div>
+        <div class="meta">${c.tranche_age} · ${c.duree_annees} ans</div>
+        <div class="delta" style="color:${c.delta_pct>0?'var(--ok)':'var(--red)'}">${fmtPct(c.delta_pct)} (${fmtEur(c.delta_net)})</div>
+        <div class="top">Top : ${c.top_categorie_label}</div>
+      </div>
+    `).join("");
+  }).catch(()=>{});
+}
+
+function renderInterets(){
+  if(!interets) return;
+  document.getElementById("interet-median").textContent=fmtEur(interets.remunerations.mediane);
+  document.getElementById("interet-p90").textContent=fmtEur(interets.remunerations.p90);
+  // participations
+  const ctx1=document.getElementById("chart-particip");
+  const topP=interets.top_participations.slice(0,10);
+  chartParticip=new Chart(ctx1,{
+    type:"bar",
+    data:{labels:topP.map(p=>p.societe), datasets:[{label:"Déclarants", data:topP.map(p=>p.n), backgroundColor:"#000091", borderRadius:6}]},
+    options:{indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{ticks:{precision:0}}, y:{grid:{display:false}}}}
+  });
+  // activités
+  const ctx2=document.getElementById("chart-activ");
+  const topA=interets.top_activites.slice(0,10);
+  chartActiv=new Chart(ctx2,{
+    type:"bar",
+    data:{labels:topA.map(a=>a.activite), datasets:[{label:"Déclarants", data:topA.map(a=>a.n), backgroundColor:"#3b6cff", borderRadius:6}]},
+    options:{indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{ticks:{precision:0}}, y:{grid:{display:false}}}}
+  });
+  document.getElementById("interet-insight").textContent=`Sur ${fmtNum(interets.total_di)} DI, la rémunération 5 ans médiane est ${fmtEur(interets.remunerations.mediane)} (moyenne ${fmtEur(interets.remunerations.moyenne)}, p90 ${fmtEur(interets.remunerations.p90)}). Top participation : ${topP[0].societe} (${topP[0].n} déclarants).`;
+}
+
 function renderMandats(){
-  // bar chart by mandat
   const ctx = document.getElementById("chart-mandats");
   const labels = byMandat.map(m=> `${m.label} (n=${m.n})`);
   const deltas = byMandat.map(m=>m.delta_moyen_net);
   chartMandat = new Chart(ctx, {
     type:"bar",
-    data:{labels, datasets:[{label:"Δ net moyen €", data:deltas, backgroundColor:["#000091","#3b6cff","#6c8cff","#a9b4ff","#d0d6ff"], borderRadius:8}]},
+    data:{labels, datasets:[{label:"Δ net moyen € (démo)", data:deltas, backgroundColor:["#000091","#3b6cff","#6c8cff","#a9b4ff","#d0d6ff"], borderRadius:8}]},
     options:{
       responsive:true, maintainAspectRatio:false,
       plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=> fmtEur(ctx.raw)}}},
       scales:{y:{ticks:{callback:v=> fmtEur(v)}}, x:{ticks:{maxRotation:22}}}
     }
   });
-  // donut répartition contribution (from byCategory)
   const donutCtx = document.getElementById("chart-donut");
   chartDonut = new Chart(donutCtx, {
     type:"doughnut",
     data:{labels: byCategory.map(c=>c.label), datasets:[{data: byCategory.map(c=>c.contribution_pct), backgroundColor:["#000091","#2a4bff","#6c8cff","#a9b4ff","#d8ddff","#eee"], borderWidth:2}]},
     options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"bottom"}, tooltip:{callbacks:{label:ctx=> `${ctx.label}: ${ctx.raw}%`}}}, cutout:"58%"}
   });
-  document.getElementById("donut-insight").textContent = `Sur 100€ de hausse, ~${byCategory[0].contribution_pct}€ viennent de l'immobilier.`;
-
-  // slider durée : filtre cohorts + recalcule kpi filtré (simulé sur mock : on filtre cohorts)
+  document.getElementById("donut-insight").textContent = `Sur 100€ de hausse (démo), ~${byCategory[0].contribution_pct}€ viennent de l'immobilier.`;
   const slider = document.getElementById("duree");
   const val = document.getElementById("duree-val");
   const nEl = document.getElementById("duree-n");
@@ -186,14 +236,12 @@ function renderMandats(){
     val.textContent = `${min} ans`;
     const filtered = cohorts.filter(c=> c.duree_annees >= min);
     nEl.textContent = `${filtered.length} profils ≥ ${min} ans (sur ${cohorts.length})`;
-    // met à jour donut avec contribution des filtrés (recalc top cat)
     if(filtered.length){
       const topCounts = {};
       filtered.forEach(c=> topCounts[c.top_categorie] = (topCounts[c.top_categorie]||0)+1);
       const top = Object.entries(topCounts).sort((a,b)=>b[1]-a[1])[0][0];
       document.getElementById("donut-insight").textContent = `Filtre ≥${min} ans : top catégorie la plus fréquente = ${top} (${topCounts[top]} profils).`;
     }
-    // griser cohorts non filtrés
     document.querySelectorAll(".cohort").forEach(el=>{
       const d = parseFloat(el.dataset.duree);
       el.style.opacity = d >= min ? "1" : ".28";
@@ -201,8 +249,6 @@ function renderMandats(){
     });
   }
   slider.addEventListener("input", updateSlider);
-  // init
-  // on attend que cohorts soient rendus
   setTimeout(updateSlider, 300);
 }
 
@@ -221,6 +267,13 @@ function renderCohorts(){
   });
 }
 
+function renderAuditTeaser(){
+  if(kpis.couverture_dsp_inventaire){
+    document.getElementById("audit-total").textContent=fmtNum(kpis.couverture_dsp_inventaire);
+    document.getElementById("audit-tele").textContent="75";
+  }
+}
+
 let currentModalId=null;
 function openModal(id){
   const c = cohorts.find(x=>x.id_anon===id);
@@ -231,7 +284,6 @@ function openModal(id){
   document.getElementById("modal-insight").textContent = `Répartition : à l'entrée ${(c.repartition_entree.immobilier/c.entree_net*100).toFixed(0)}% immo, à la sortie ${(c.repartition_sortie.immobilier/c.sortie_net*100).toFixed(0)}% immo. Le slider filtre ces cartes.`;
   document.getElementById("modal").classList.add("open");
   document.getElementById("modal").setAttribute("aria-hidden","false");
-  // chart
   const ctx = document.getElementById("modal-chart");
   if(modalChart) modalChart.destroy();
   modalChart = new Chart(ctx, {
@@ -264,7 +316,35 @@ function setupProgress(){
   addEventListener("scroll", onScroll, {passive:true});
 }
 
+function setupOG(){
+  const btn=document.getElementById("btn-og");
+  if(!btn) return;
+  btn.addEventListener("click", ()=>{
+    const canvas=document.getElementById("og-canvas");
+    const ctx=canvas.getContext("2d");
+    // fond
+    ctx.fillStyle="#FFFBF7"; ctx.fillRect(0,0,1200,630);
+    // barre top
+    ctx.fillStyle="#000091"; ctx.fillRect(0,0,1200,12);
+    // titre
+    ctx.fillStyle="#1a1a2e"; ctx.font="800 54px Inter, sans-serif"; ctx.fillText("Patrimoinoscope", 60, 100);
+    ctx.font="600 22px Inter, sans-serif"; ctx.fillStyle="#6b6b7a"; ctx.fillText("Ce qui augmente vraiment pendant un mandat — HATVP", 60, 140);
+    // kpis
+    ctx.fillStyle="#000091"; ctx.font="800 44px Inter, sans-serif"; ctx.fillText(`${fmtPct(kpis.delta_net_pct)} en ${kpis.duree_moyenne_annees} ans`, 60, 250);
+    ctx.font="600 20px Inter, sans-serif"; ctx.fillStyle="#1a1a2e"; ctx.fillText(`Patrimoine net : ${fmtEur(kpis.entree_net_moyen)} → ${fmtEur(kpis.sortie_net_moyen)}`, 60, 290);
+    ctx.fillStyle="#0a7d48"; ctx.font="800 36px Inter, sans-serif"; ctx.fillText(`Top : ${kpis.top_categorie} ${fmtEur(kpis.top_categorie_delta)}`, 60, 350);
+    ctx.fillStyle="#6b6b7a"; ctx.font="500 18px Inter, sans-serif"; ctx.fillText(`Source : HATVP open data · ${kpis.n_paires} paires · Licence Ouverte 2.0`, 60, 400);
+    ctx.fillStyle="#000091"; ctx.font="700 16px Inter, sans-serif"; ctx.fillText("wald52.github.io/patrimoinoscope", 60, 580);
+    ctx.fillStyle="#E1000F"; ctx.fillRect(1050, 560, 90, 10);
+    // download
+    const a=document.createElement("a");
+    a.download="patrimoinoscope-og.png";
+    a.href=canvas.toDataURL("image/png");
+    a.click();
+  });
+}
+
 load().catch(e=>{
   console.error(e);
-  document.body.insertAdjacentHTML("afterbegin", `<div style="background:#fff0f0;border:1px solid #E1000F;padding:10px;text-align:center">Erreur chargement données : ${e.message} — Vérifie <code>data/</code></div>`);
+  document.body.insertAdjacentHTML("afterbegin", `<div style="background:#fff0f0;border:1px solid #E1000F;padding:10px;text-align:center" role="alert">Erreur chargement données : ${e.message} — Vérifie <code>data/</code></div>`);
 });

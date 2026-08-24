@@ -9,3 +9,6 @@ __pycache__/
 .env
 .DS_Store
 Thumbs.db
+
+!data/liste.csv
+!site/data/liste.csv

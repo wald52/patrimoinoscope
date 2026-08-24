@@ -1,0 +1,94 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audit â€” Patrimoinoscope</title>
+<meta name="description" content="Audit d'exhaustivitÃ© HATVP : 13330 dÃ©clarations, 75 DSP tÃ©lÃ©chargeables, 3 paires.">
+<link rel="stylesheet" href="./site/style.css">
+<style>.audit-table{width:100%;border-collapse:collapse;font-size:.9rem}.audit-table th,.audit-table td{border:1px solid var(--line);padding:8px;text-align:left}.audit-table th{background:#f6f6ff;position:sticky;top:0}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.filters input,.filters select{padding:6px 8px;border:1px solid var(--line);border-radius:8px}</style>
+</head>
+<body>
+<header class="topbar"><div class="container inner"><div class="brand"><div class="logo">â—‰</div><div>Patrimoinoscope<small>audit d'exhaustivitÃ©</small></div></div><nav class="nav"><a href="./index.html">â† Accueil</a><a href="./docs/DATA.md">DATA.md</a></nav></div></header>
+<main class="container">
+<section class="hero" style="padding:24px 0">
+<h1>Audit HATVP â€” pourquoi si peu de DSP ?</h1>
+<p class="lead">Inventaire <code>liste.csv:13330</code> vs tÃ©lÃ©chargeable <code>declarations.xml:6608</code>. Les DSP dÃ©putÃ©s/sÃ©nateurs sont en <code>404</code>.</p>
+<div class="kpis" id="audit-kpis"></div>
+</section>
+<section class="section card">
+<h2>Filtre inventaire (Ã©chantillon 1000 lignes)</h2>
+<div class="filters">
+<input id="q" placeholder="Rechercher nom, mandat, type..." aria-label="Rechercher">
+<select id="f-type" aria-label="Type"><option value="">Tous types</option><option>di</option><option>dia</option><option>dsp</option><option>dspm</option></select>
+<select id="f-mandat" aria-label="Mandat"><option value="">Tous mandats</option><option>gouvernement</option><option>depute</option><option>senateur</option><option>departement</option></select>
+<select id="f-statut" aria-label="Statut"><option value="">Tous statuts</option><option>LivrÃ©e</option><option>En cours</option></select>
+</div>
+<div style="max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+<table class="audit-table" id="tbl"><thead><tr><th>Nom</th><th>Mandat</th><th>Type</th><th>Statut</th><th>Open_data</th></tr></thead><tbody id="tbody"></tbody></table>
+</div>
+<p class="notice" id="tbl-info" style="margin-top:8px"></p>
+</section>
+<section class="section card">
+<h2>Preuve 404</h2>
+<p class="desc">Exemples testÃ©s via <code>HEAD https://www.hatvp.fr/livraison/dossiers/&lt;open_data&gt;</code> :</p>
+<ul id="proof" style="color:var(--muted)"></ul>
+</section>
+</main>
+<script type="module">
+const fmtNum=n=>new Intl.NumberFormat("fr-FR").format(n);
+async function load(){
+  const [kpis, liste] = await Promise.all([
+    fetch("./data/kpis.json").then(r=>r.json()),
+    fetch("./data/liste.csv").then(r=>r.text()).catch(()=>null)
+  ]);
+  document.getElementById("audit-kpis").innerHTML=`
+    <div class="kpi"><div class="label">Inventaire DSP</div><div class="value">${fmtNum(kpis.couverture_dsp_inventaire)}</div><div class="hint">1052+1185+396</div></div>
+    <div class="kpi"><div class="label">TÃ©lÃ©chargeables</div><div class="value">75</div><div class="hint">64 dsp + 11 dspfm</div></div>
+    <div class="kpi"><div class="label">Paires N</div><div class="value">${kpis.n_paires_reel ?? 3}</div><div class="hint">sur 75 DSP</div></div>
+  `;
+  // parse liste.csv Ã©chantillon
+  if(liste){
+    const lines=liste.split("\n");
+    const header=lines[0].split(";");
+    const rows=lines.slice(1,1001).map(l=>{
+      const cols=l.split(";");
+      const o={}; header.forEach((h,i)=>o[h]=cols[i]||"");
+      return o;
+    }).filter(r=>r.civilite);
+    const tbody=document.getElementById("tbody");
+    function render(){
+      const q=document.getElementById("q").value.toLowerCase();
+      const t=document.getElementById("f-type").value;
+      const m=document.getElementById("f-mandat").value;
+      const s=document.getElementById("f-statut").value;
+      const filt=rows.filter(r=>{
+        if(q && !`${r.prenom} ${r.nom} ${r.type_mandat} ${r.type_document}`.toLowerCase().includes(q)) return false;
+        if(t && r.type_document.toLowerCase()!==t) return false;
+        if(m && r.type_mandat!==m) return false;
+        if(s && !r.statut_publication.includes(s)) return false;
+        return true;
+      });
+      tbody.innerHTML=filt.slice(0,200).map(r=>`<tr><td>${r.prenom} ${r.nom}</td><td>${r.type_mandat}</td><td>${r.type_document}</td><td>${r.statut_publication}</td><td>${r.open_data||"â€”"}</td></tr>`).join("");
+      document.getElementById("tbl-info").textContent=`${filt.length} rÃ©sultats (Ã©chantillon 1000, total 13330)`;
+    }
+    document.getElementById("q").addEventListener("input", render);
+    document.getElementById("f-type").addEventListener("change", render);
+    document.getElementById("f-mandat").addEventListener("change", render);
+    document.getElementById("f-statut").addEventListener("change", render);
+    render();
+  }
+  // proof
+  const proofs=[
+    ["lahmar-abdelkader-dsp31970-depute-69.xml","404 â€” Consultable en prÃ©fecture"],
+    ["ziane-adel-dsp28555-senateur-93.xml","404"],
+    ["rufo-alice-dsp34866-gouvernement.xml","200 OK"],
+    ["le-henanff-anne-dsp34881-gouvernement.xml","200 OK"],
+  ];
+  document.getElementById("proof").innerHTML=proofs.map(([f,s])=>`<li><code>${f}</code> â†’ ${s}</li>`).join("");
+}
+load();
+</script>
+</body>
+</html>
+

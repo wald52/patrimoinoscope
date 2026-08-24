@@ -1,0 +1,18 @@
+{
+  "n_paires": 3,
+  "n_declarations": 6,
+  "duree_moyenne_annees": 1.9,
+  "entree_net_moyen": 1104915,
+  "sortie_net_moyen": 843543,
+  "delta_net_moyen": -261371,
+  "delta_net_pct": -23.7,
+  "top_categorie": "Véhicules",
+  "top_categorie_delta": 6766,
+  "date_generation": "2026-08-24",
+  "source": "HATVP open data (declarations.xml + liste.csv + dossiers individuels)",
+  "licence": "Licence Ouverte 2.0 Etalab",
+  "couverture_dsp_inventaire": 2633,
+  "couverture_dsp_livres": 2344,
+  "couverture_dsp_avec_xml": 2343,
+  "couverture_dossiers_telecharges": 2315
+}
