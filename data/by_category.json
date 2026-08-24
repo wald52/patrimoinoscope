@@ -1,0 +1,56 @@
+[
+  {
+    "categorie": "immobilier",
+    "label": "Immobilier",
+    "debut_moyen": 165000,
+    "fin_moyenne": 206000,
+    "delta_moyen": 41000,
+    "delta_pct": 24.8,
+    "contribution_pct": 66.1
+  },
+  {
+    "categorie": "assurance_vie",
+    "label": "Assurance-vie",
+    "debut_moyen": 38000,
+    "fin_moyenne": 47000,
+    "delta_moyen": 9000,
+    "delta_pct": 23.7,
+    "contribution_pct": 14.5
+  },
+  {
+    "categorie": "epargne",
+    "label": "Épargne bancaire",
+    "debut_moyen": 42000,
+    "fin_moyenne": 48000,
+    "delta_moyen": 6000,
+    "delta_pct": 14.3,
+    "contribution_pct": 9.7
+  },
+  {
+    "categorie": "valeurs_bourse",
+    "label": "Valeurs boursières",
+    "debut_moyen": 28000,
+    "fin_moyenne": 32000,
+    "delta_moyen": 4000,
+    "delta_pct": 14.3,
+    "contribution_pct": 6.5
+  },
+  {
+    "categorie": "autres",
+    "label": "Autres",
+    "debut_moyen": 8000,
+    "fin_moyenne": 9500,
+    "delta_moyen": 1500,
+    "delta_pct": 18.8,
+    "contribution_pct": 2.4
+  },
+  {
+    "categorie": "vehicules",
+    "label": "Véhicules",
+    "debut_moyen": 4000,
+    "fin_moyenne": 4500,
+    "delta_moyen": 500,
+    "delta_pct": 12.5,
+    "contribution_pct": 0.8
+  }
+]

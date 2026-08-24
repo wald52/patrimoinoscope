@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patrimoinoscope — Ce qui augmente vraiment dans le patrimoine des élus</title>
+<meta name="description" content="Analyse agrégée et anonymisée de toutes les déclarations HATVP : qu'est-ce qui augmente le plus entre le début et la fin du mandat ? Immobilier, Bourse, assurance-vie, épargne.">
+<meta property="og:title" content="Patrimoinoscope — Le patrimoine des élus sous la loupe">
+<meta property="og:description" content="Immobilier, Bourse, épargne : où part la hausse entre le début et la fin du mandat ? Analyse macro HATVP, vue anonymisée et partageable.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000091">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23000091'/><text x='50' y='62' text-anchor='middle' font-size='56' fill='white'>◎</text></svg>">
+<link rel="stylesheet" href="./site/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="container inner">
+    <div class="brand">
+      <div class="logo">◉</div>
+      <div>
+        Patrimoinoscope
+        <small>par Le Modèle Social Français — données HATVP</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#quiz">Quiz</a>
+      <a href="#categories">Catégories</a>
+      <a href="#mandats">Mandats</a>
+      <a href="#cohortes">Profils</a>
+      <a href="#methode">Méthode</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Observatoire agrégé · Licence Ouverte 2.0</div>
+        <h1>Qu'est-ce qui augmente <span style="color:var(--blue)">vraiment</span> pendant un mandat ?</h1>
+        <p class="lead">
+          Nous avons apparié <span class="numeral" id="hero-n">—</span> paires entrée / sortie pour toutes les déclarations HATVP publiées.
+          Résultat : on ne publie <strong>aucun nom</strong>, seulement des moyennes anonymisées.
+          <span id="hero-top">Le poste #1 : —</span>
+        </p>
+        <div class="kpis" id="kpis">
+          <!-- rempli par JS -->
+        </div>
+        <div class="progress" aria-hidden="true"><span id="read-progress"></span></div>
+        <p class="notice" style="margin-top:12px">Mise à jour : <span id="kpi-date">—</span> · Source : HATVP open data · <span id="kpi-n-paires">—</span> paires · Durée moyenne <span id="kpi-duree">—</span> ans</p>
+      </div>
+      <div class="card quiz" id="quiz">
+        <h2>🎯 Quiz express (15s)</h2>
+        <p class="sub">À ton avis, entre le début et la fin du mandat, qu'est-ce qui augmente le plus <em>en euros</em> en moyenne ?</p>
+        <div class="choices" id="choices">
+          <button class="choice" data-answer="immobilier">Immobilier <span class="badge">1</span></button>
+          <button class="choice" data-answer="valeurs_bourse">Bourse <span class="badge">2</span></button>
+          <button class="choice" data-answer="assurance_vie">Assurance-vie <span class="badge">3</span></button>
+          <button class="choice" data-answer="epargne">Épargne <span class="badge">4</span></button>
+        </div>
+        <div class="quiz-result" id="quiz-result"></div>
+        <div class="share" id="quiz-share" style="display:none">
+          <button class="btn btn-primary" id="btn-share">Partager ce constat</button>
+          <button class="btn btn-ghost" id="btn-again">Rejouer</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section card" id="categories">
+    <h2>1. Le classement des catégories</h2>
+    <p class="desc">Delta moyen (sortie − entrée) en euros. La couleur = contribution à la hausse totale. Toggle net/brut et % pour creuser.</p>
+    <div class="controls">
+      <div class="toggle" role="tablist" aria-label="Mode">
+        <button class="active" data-mode="euros">En €</button>
+        <button data-mode="pct">En %</button>
+      </div>
+      <label><input type="checkbox" id="chk-net"> Voir le net (après dettes)</label>
+      <span style="margin-left:auto;font-size:.82rem;color:var(--muted)" id="cat-subtitle">—</span>
+    </div>
+    <div class="chart-wrap"><canvas id="chart-categories"></canvas></div>
+    <p class="notice" id="cat-insight">—</p>
+  </section>
+
+  <!-- MANDATS + SLIDER -->
+  <section class="section card" id="mandats">
+    <h2>2. Selon le mandat et la durée</h2>
+    <p class="desc">Glisse le slider : la hausse change-t-elle si le mandat est plus long ? Filtre anonymisé, <code>N</code> affiché pour rester honnête.</p>
+    <div class="controls">
+      <label for="duree">Durée minimale du mandat : <strong id="duree-val">2.5 ans</strong></label>
+      <input class="slider" id="duree" type="range" min="1" max="6" step="0.5" value="2.5">
+      <span id="duree-n" style="font-size:.85rem;color:var(--muted)">— paires</span>
+    </div>
+    <div class="grid2">
+      <div>
+        <h3 style="margin:6px 0">Par type de mandat</h3>
+        <div class="chart-wrap sm"><canvas id="chart-mandats"></canvas></div>
+      </div>
+      <div>
+        <h3 style="margin:6px 0">Répartition de la hausse</h3>
+        <div class="chart-wrap sm"><canvas id="chart-donut"></canvas></div>
+        <p class="notice" id="donut-insight">—</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COHORTES -->
+  <section class="section" id="cohortes">
+    <h2>3. 20 profils anonymes pour incarner</h2>
+    <p class="desc">Aucun nom, juste des cohortes type <em>anon_001</em>. Clique pour voir la répartition entrée vs sortie. Objectif : humaniser sans exposer.</p>
+    <div class="cohorts" id="cohorts"></div>
+  </section>
+
+  <!-- METHODE -->
+  <section class="section card" id="methode">
+    <h2>Méthode & limites</h2>
+    <ul style="color:var(--muted)">
+      <li><strong>Sources :</strong> <a href="https://www.hatvp.fr/open-data/" target="_blank" rel="noopener">hatvp.fr/open-data</a> — <code>liste.csv</code> + <code>declarations.xml</code> (Licence Ouverte 2.0 Etalab). Aussi sur data.gouv.fr.</li>
+      <li><strong>Couverture :</strong> toutes les déclarations <em>publiées</em> en open data (DSP/DSPM). Les DSP non publiées ne sont pas dans l'open data par design.</li>
+      <li><strong>Appariement :</strong> hash interne <code>nom+prenom+dateNaissance</code> + même <code>cat_mandat</code>, tri par <code>dateDepot</code>. Paires entrée/sortie avec durée ≥ 0.5 an. Flag <code>evenement_majeur</code> (héritage/donation) isolé.</li>
+      <li><strong>Anonymisation :</strong> agrégats si <code>N≥10</code>, 20 profils <code>anon_*</code> avec tranche d'âge et type de mandat uniquement. Aucune donnée nominative publiée.</li>
+      <li><strong>Catégories :</strong> Immobilier (immeuble + SCI, quote-part appliquée) · Bourse · Assurance-vie · Épargne bancaire · Véhicules · Autres. Net = brut − passif.</li>
+      <li><strong>Reproductible :</strong> <code>scripts/download.py</code> + <code>scripts/build_data.py</code> → 4 JSON. Relance hebdo via GitHub Actions.</li>
+    </ul>
+    <div class="share">
+      <button class="btn btn-primary" id="btn-share2">Partager le site</button>
+      <a class="btn btn-ghost" href="https://github.com/lemodelesocialfrancais/patrimoinoscope" target="_blank" rel="noopener">Voir le code</a>
+      <a class="btn btn-ghost" href="./data/kpis.json" target="_blank">kpis.json</a>
+      <a class="btn btn-ghost" href="./data/by_category.json" target="_blank">by_category.json</a>
+    </div>
+    <p class="notice" style="margin-top:12px">Design : système Marianne (bleu #000091), Chart.js, vanilla JS. Hébergé sur GitHub Pages. Contact via l'org <code>lemodelesocialfrancais</code>.</p>
+  </section>
+
+  <footer class="foot">
+    <div>Patrimoinoscope — Observatoire citoyen, sérieux et partageable. Pas d'affichage nominatif. Données HATVP — Licence Ouverte 2.0.</div>
+    <div style="margin-top:6px">Code source : <code>github.com/lemodelesocialfrancais/patrimoinoscope</code> — aucun lien dur à l'organisation dans le code (chemins relatifs).</div>
+  </footer>
+</main>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="close" id="modal-close">✕</button>
+    <h3 id="modal-title">—</h3>
+    <p id="modal-meta" style="color:var(--muted);font-size:.9rem">—</p>
+    <div class="chart-wrap sm"><canvas id="modal-chart"></canvas></div>
+    <p class="notice" id="modal-insight">—</p>
+  </div>
+</div>
+
+<script type="module" src="./site/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+[
+  {
+    "mandat": "gouvernement",
+    "label": "gouvernement",
+    "n": 18,
+    "debut_moyen_net": 520000,
+    "fin_moyenne_net": 640000,
+    "delta_moyen_net": 120000,
+    "delta_pct": 23.1,
+    "top_categorie": "immobilier"
+  },
+  {
+    "mandat": "parlement",
+    "label": "parlement",
+    "n": 62,
+    "debut_moyen_net": 310000,
+    "fin_moyenne_net": 380000,
+    "delta_moyen_net": 70000,
+    "delta_pct": 22.6,
+    "top_categorie": "immobilier"
+  },
+  {
+    "mandat": "region",
+    "label": "region",
+    "n": 28,
+    "debut_moyen_net": 210000,
+    "fin_moyenne_net": 250000,
+    "delta_moyen_net": 40000,
+    "delta_pct": 19.0,
+    "top_categorie": "immobilier"
+  },
+  {
+    "mandat": "departement",
+    "label": "departement",
+    "n": 34,
+    "debut_moyen_net": 190000,
+    "fin_moyenne_net": 220000,
+    "delta_moyen_net": 30000,
+    "delta_pct": 15.8,
+    "top_categorie": "immobilier"
+  },
+  {
+    "mandat": "commune/epci",
+    "label": "commune/epci",
+    "n": 42,
+    "debut_moyen_net": 165000,
+    "fin_moyenne_net": 185000,
+    "delta_moyen_net": 20000,
+    "delta_pct": 12.1,
+    "top_categorie": "epargne"
+  }
+]

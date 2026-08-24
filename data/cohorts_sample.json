@@ -1,0 +1,582 @@
+[
+  {
+    "id_anon": "anon_001",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 4.9,
+    "entree_net": 248393,
+    "sortie_net": 289865,
+    "delta_net": 41472,
+    "delta_pct": 16.7,
+    "top_categorie": "valeurs_bourse",
+    "top_categorie_label": "Bourse",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 136616,
+      "valeurs_bourse": 29807,
+      "assurance_vie": 34775,
+      "epargne": 37258,
+      "vehicules": 4967,
+      "autres": 4967
+    },
+    "repartition_sortie": {
+      "immobilier": 168121,
+      "valeurs_bourse": 34783,
+      "assurance_vie": 37682,
+      "epargne": 37682,
+      "vehicules": 5797,
+      "autres": 5797
+    }
+  },
+  {
+    "id_anon": "anon_002",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "commune/epci",
+    "duree_annees": 4.4,
+    "entree_net": 136663,
+    "sortie_net": 144717,
+    "delta_net": 8054,
+    "delta_pct": 5.9,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 75164,
+      "valeurs_bourse": 16399,
+      "assurance_vie": 19132,
+      "epargne": 20499,
+      "vehicules": 2733,
+      "autres": 2733
+    },
+    "repartition_sortie": {
+      "immobilier": 83935,
+      "valeurs_bourse": 17366,
+      "assurance_vie": 18813,
+      "epargne": 18813,
+      "vehicules": 2894,
+      "autres": 2894
+    }
+  },
+  {
+    "id_anon": "anon_003",
+    "tranche_age": "40-49 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 4.9,
+    "entree_net": 487696,
+    "sortie_net": 616195,
+    "delta_net": 128499,
+    "delta_pct": 26.3,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 268232,
+      "valeurs_bourse": 58523,
+      "assurance_vie": 68277,
+      "epargne": 73154,
+      "vehicules": 9753,
+      "autres": 9753
+    },
+    "repartition_sortie": {
+      "immobilier": 357393,
+      "valeurs_bourse": 73943,
+      "assurance_vie": 80105,
+      "epargne": 80105,
+      "vehicules": 12323,
+      "autres": 12323
+    }
+  },
+  {
+    "id_anon": "anon_004",
+    "tranche_age": "40-49 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 4.8,
+    "entree_net": 298389,
+    "sortie_net": 353102,
+    "delta_net": 54713,
+    "delta_pct": 18.3,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 164113,
+      "valeurs_bourse": 35806,
+      "assurance_vie": 41774,
+      "epargne": 44758,
+      "vehicules": 5967,
+      "autres": 5967
+    },
+    "repartition_sortie": {
+      "immobilier": 204799,
+      "valeurs_bourse": 42372,
+      "assurance_vie": 45903,
+      "epargne": 45903,
+      "vehicules": 7062,
+      "autres": 7062
+    }
+  },
+  {
+    "id_anon": "anon_005",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 3.8,
+    "entree_net": 308208,
+    "sortie_net": 417390,
+    "delta_net": 109182,
+    "delta_pct": 35.4,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 169514,
+      "valeurs_bourse": 36984,
+      "assurance_vie": 43149,
+      "epargne": 46231,
+      "vehicules": 6164,
+      "autres": 6164
+    },
+    "repartition_sortie": {
+      "immobilier": 242086,
+      "valeurs_bourse": 50086,
+      "assurance_vie": 54260,
+      "epargne": 54260,
+      "vehicules": 8347,
+      "autres": 8347
+    }
+  },
+  {
+    "id_anon": "anon_006",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "departement",
+    "duree_annees": 5.7,
+    "entree_net": 318461,
+    "sortie_net": 341912,
+    "delta_net": 23451,
+    "delta_pct": 7.4,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 175153,
+      "valeurs_bourse": 38215,
+      "assurance_vie": 44584,
+      "epargne": 47769,
+      "vehicules": 6369,
+      "autres": 6369
+    },
+    "repartition_sortie": {
+      "immobilier": 198308,
+      "valeurs_bourse": 41029,
+      "assurance_vie": 44448,
+      "epargne": 44448,
+      "vehicules": 6838,
+      "autres": 6838
+    }
+  },
+  {
+    "id_anon": "anon_007",
+    "tranche_age": "40-49 ans",
+    "type_mandat": "region",
+    "duree_annees": 4.8,
+    "entree_net": 144025,
+    "sortie_net": 179797,
+    "delta_net": 35772,
+    "delta_pct": 24.8,
+    "top_categorie": "assurance_vie",
+    "top_categorie_label": "Assurance-vie",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 79213,
+      "valeurs_bourse": 17283,
+      "assurance_vie": 20163,
+      "epargne": 21603,
+      "vehicules": 2880,
+      "autres": 2880
+    },
+    "repartition_sortie": {
+      "immobilier": 104282,
+      "valeurs_bourse": 21575,
+      "assurance_vie": 23373,
+      "epargne": 23373,
+      "vehicules": 3595,
+      "autres": 3595
+    }
+  },
+  {
+    "id_anon": "anon_008",
+    "tranche_age": "60+ ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 3.4,
+    "entree_net": 453281,
+    "sortie_net": 612035,
+    "delta_net": 158754,
+    "delta_pct": 35.0,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 249304,
+      "valeurs_bourse": 54393,
+      "assurance_vie": 63459,
+      "epargne": 67992,
+      "vehicules": 9065,
+      "autres": 9065
+    },
+    "repartition_sortie": {
+      "immobilier": 354980,
+      "valeurs_bourse": 73444,
+      "assurance_vie": 79564,
+      "epargne": 79564,
+      "vehicules": 12240,
+      "autres": 12240
+    }
+  },
+  {
+    "id_anon": "anon_009",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "region",
+    "duree_annees": 4.5,
+    "entree_net": 209725,
+    "sortie_net": 253817,
+    "delta_net": 44092,
+    "delta_pct": 21.0,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 115348,
+      "valeurs_bourse": 25167,
+      "assurance_vie": 29361,
+      "epargne": 31458,
+      "vehicules": 4194,
+      "autres": 4194
+    },
+    "repartition_sortie": {
+      "immobilier": 147213,
+      "valeurs_bourse": 30458,
+      "assurance_vie": 32996,
+      "epargne": 32996,
+      "vehicules": 5076,
+      "autres": 5076
+    }
+  },
+  {
+    "id_anon": "anon_010",
+    "tranche_age": "40-49 ans",
+    "type_mandat": "region",
+    "duree_annees": 4.8,
+    "entree_net": 149327,
+    "sortie_net": 167054,
+    "delta_net": 17727,
+    "delta_pct": 11.9,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 82129,
+      "valeurs_bourse": 17919,
+      "assurance_vie": 20905,
+      "epargne": 22399,
+      "vehicules": 2986,
+      "autres": 2986
+    },
+    "repartition_sortie": {
+      "immobilier": 96891,
+      "valeurs_bourse": 20046,
+      "assurance_vie": 21717,
+      "epargne": 21717,
+      "vehicules": 3341,
+      "autres": 3341
+    }
+  },
+  {
+    "id_anon": "anon_011",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "region",
+    "duree_annees": 3.2,
+    "entree_net": 417365,
+    "sortie_net": 547962,
+    "delta_net": 130597,
+    "delta_pct": 31.3,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 229550,
+      "valeurs_bourse": 50083,
+      "assurance_vie": 58431,
+      "epargne": 62604,
+      "vehicules": 8347,
+      "autres": 8347
+    },
+    "repartition_sortie": {
+      "immobilier": 317817,
+      "valeurs_bourse": 65755,
+      "assurance_vie": 71235,
+      "epargne": 71235,
+      "vehicules": 10959,
+      "autres": 10959
+    }
+  },
+  {
+    "id_anon": "anon_012",
+    "tranche_age": "60+ ans",
+    "type_mandat": "departement",
+    "duree_annees": 3.0,
+    "entree_net": 193206,
+    "sortie_net": 217161,
+    "delta_net": 23955,
+    "delta_pct": 12.4,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 106263,
+      "valeurs_bourse": 23184,
+      "assurance_vie": 27048,
+      "epargne": 28980,
+      "vehicules": 3864,
+      "autres": 3864
+    },
+    "repartition_sortie": {
+      "immobilier": 125953,
+      "valeurs_bourse": 26059,
+      "assurance_vie": 28230,
+      "epargne": 28230,
+      "vehicules": 4343,
+      "autres": 4343
+    }
+  },
+  {
+    "id_anon": "anon_013",
+    "tranche_age": "60+ ans",
+    "type_mandat": "commune/epci",
+    "duree_annees": 5.5,
+    "entree_net": 329400,
+    "sortie_net": 381642,
+    "delta_net": 52242,
+    "delta_pct": 15.9,
+    "top_categorie": "assurance_vie",
+    "top_categorie_label": "Assurance-vie",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 181170,
+      "valeurs_bourse": 39528,
+      "assurance_vie": 46116,
+      "epargne": 49410,
+      "vehicules": 6588,
+      "autres": 6588
+    },
+    "repartition_sortie": {
+      "immobilier": 221352,
+      "valeurs_bourse": 45797,
+      "assurance_vie": 49613,
+      "epargne": 49613,
+      "vehicules": 7632,
+      "autres": 7632
+    }
+  },
+  {
+    "id_anon": "anon_014",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 5.3,
+    "entree_net": 200132,
+    "sortie_net": 257816,
+    "delta_net": 57684,
+    "delta_pct": 28.8,
+    "top_categorie": "epargne",
+    "top_categorie_label": "Épargne",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 110072,
+      "valeurs_bourse": 24015,
+      "assurance_vie": 28018,
+      "epargne": 30019,
+      "vehicules": 4002,
+      "autres": 4002
+    },
+    "repartition_sortie": {
+      "immobilier": 149533,
+      "valeurs_bourse": 30937,
+      "assurance_vie": 33516,
+      "epargne": 33516,
+      "vehicules": 5156,
+      "autres": 5156
+    }
+  },
+  {
+    "id_anon": "anon_015",
+    "tranche_age": "60+ ans",
+    "type_mandat": "departement",
+    "duree_annees": 4.5,
+    "entree_net": 365392,
+    "sortie_net": 441661,
+    "delta_net": 76269,
+    "delta_pct": 20.9,
+    "top_categorie": "assurance_vie",
+    "top_categorie_label": "Assurance-vie",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 200965,
+      "valeurs_bourse": 43847,
+      "assurance_vie": 51154,
+      "epargne": 54808,
+      "vehicules": 7307,
+      "autres": 7307
+    },
+    "repartition_sortie": {
+      "immobilier": 256163,
+      "valeurs_bourse": 52999,
+      "assurance_vie": 57415,
+      "epargne": 57415,
+      "vehicules": 8833,
+      "autres": 8833
+    }
+  },
+  {
+    "id_anon": "anon_016",
+    "tranche_age": "50-59 ans",
+    "type_mandat": "gouvernement",
+    "duree_annees": 5.0,
+    "entree_net": 298349,
+    "sortie_net": 338168,
+    "delta_net": 39819,
+    "delta_pct": 13.3,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 164091,
+      "valeurs_bourse": 35801,
+      "assurance_vie": 41768,
+      "epargne": 44752,
+      "vehicules": 5966,
+      "autres": 5966
+    },
+    "repartition_sortie": {
+      "immobilier": 196137,
+      "valeurs_bourse": 40580,
+      "assurance_vie": 43961,
+      "epargne": 43961,
+      "vehicules": 6763,
+      "autres": 6763
+    }
+  },
+  {
+    "id_anon": "anon_017",
+    "tranche_age": "40-49 ans",
+    "type_mandat": "region",
+    "duree_annees": 4.2,
+    "entree_net": 175789,
+    "sortie_net": 230486,
+    "delta_net": 54697,
+    "delta_pct": 31.1,
+    "top_categorie": "immobilier",
+    "top_categorie_label": "Immobilier",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 96683,
+      "valeurs_bourse": 21094,
+      "assurance_vie": 24610,
+      "epargne": 26368,
+      "vehicules": 3515,
+      "autres": 3515
+    },
+    "repartition_sortie": {
+      "immobilier": 133681,
+      "valeurs_bourse": 27658,
+      "assurance_vie": 29963,
+      "epargne": 29963,
+      "vehicules": 4609,
+      "autres": 4609
+    }
+  },
+  {
+    "id_anon": "anon_018",
+    "tranche_age": "40-49 ans",
+    "type_mandat": "commune/epci",
+    "duree_annees": 3.0,
+    "entree_net": 204698,
+    "sortie_net": 248055,
+    "delta_net": 43357,
+    "delta_pct": 21.2,
+    "top_categorie": "valeurs_bourse",
+    "top_categorie_label": "Bourse",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 112583,
+      "valeurs_bourse": 24563,
+      "assurance_vie": 28657,
+      "epargne": 30704,
+      "vehicules": 4093,
+      "autres": 4093
+    },
+    "repartition_sortie": {
+      "immobilier": 143871,
+      "valeurs_bourse": 29766,
+      "assurance_vie": 32247,
+      "epargne": 32247,
+      "vehicules": 4961,
+      "autres": 4961
+    }
+  },
+  {
+    "id_anon": "anon_019",
+    "tranche_age": "50-59 ans",
+    "type_mandat": "commune/epci",
+    "duree_annees": 4.1,
+    "entree_net": 178650,
+    "sortie_net": 237377,
+    "delta_net": 58727,
+    "delta_pct": 32.9,
+    "top_categorie": "epargne",
+    "top_categorie_label": "Épargne",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 98257,
+      "valeurs_bourse": 21438,
+      "assurance_vie": 25011,
+      "epargne": 26797,
+      "vehicules": 3573,
+      "autres": 3573
+    },
+    "repartition_sortie": {
+      "immobilier": 137678,
+      "valeurs_bourse": 28485,
+      "assurance_vie": 30859,
+      "epargne": 30859,
+      "vehicules": 4747,
+      "autres": 4747
+    }
+  },
+  {
+    "id_anon": "anon_020",
+    "tranche_age": "30-39 ans",
+    "type_mandat": "parlement",
+    "duree_annees": 2.8,
+    "entree_net": 374798,
+    "sortie_net": 485291,
+    "delta_net": 110493,
+    "delta_pct": 29.5,
+    "top_categorie": "valeurs_bourse",
+    "top_categorie_label": "Bourse",
+    "evenement_majeur": false,
+    "repartition_entree": {
+      "immobilier": 206138,
+      "valeurs_bourse": 44975,
+      "assurance_vie": 52471,
+      "epargne": 56219,
+      "vehicules": 7495,
+      "autres": 7495
+    },
+    "repartition_sortie": {
+      "immobilier": 281468,
+      "valeurs_bourse": 58234,
+      "assurance_vie": 63087,
+      "epargne": 63087,
+      "vehicules": 9705,
+      "autres": 9705
+    }
+  }
+]

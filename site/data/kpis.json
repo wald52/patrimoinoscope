@@ -1,0 +1,16 @@
+{
+  "n_paires": 184,
+  "n_declarations": 368,
+  "duree_moyenne_annees": 4.2,
+  "entree_net_moyen": 285000,
+  "sortie_net_moyen": 347000,
+  "delta_net_moyen": 62000,
+  "delta_net_pct": 21.8,
+  "top_categorie": "Immobilier",
+  "top_categorie_delta": 41000,
+  "date_generation": "2026-08-24",
+  "source": "HATVP open data (MOCK déterministe — en attente du vrai XML)",
+  "licence": "Licence Ouverte 2.0 Etalab",
+  "mode": "mock",
+  "n_paires_reel": 3
+}

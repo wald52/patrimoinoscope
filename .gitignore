@@ -1,0 +1,11 @@
+# raw data never committed (88MB)
+data/raw/
+data/processed/*.parquet
+data/processed/*.xml
+*.pyc
+__pycache__/
+.venv/
+.venv*/
+.env
+.DS_Store
+Thumbs.db
