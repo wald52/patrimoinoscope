@@ -4,11 +4,11 @@ const fmtEur = n => new Intl.NumberFormat("fr-FR", { style:"currency", currency:
 const fmtPct = n => `${n>0?"+":""}${n.toFixed(1).replace(".",",")}%`;
 const fmtNum = n => new Intl.NumberFormat("fr-FR").format(n);
 
-let kpis, byCategory, byMandat, cohorts, kpisReel, catReel, interets;
-let chartCat, chartMandat, chartDonut, modalChart, chartReel, chartParticip, chartActiv;
+let kpis, byCategory, byMandat, cohorts, kpisReel, catReel, interets, timeseries;
+let chartCat, chartMandat, chartDonut, modalChart, chartReel, chartParticip, chartActiv, chartTimeseries;
 
 async function load(){
-  const [k,bm,bc,cs, kr, cr, inter] = await Promise.all([
+  const [k,bm,bc,cs, kr, cr, inter, ts] = await Promise.all([
     fetch(`${DATA_PATH}kpis.json`).then(r=>r.json()),
     fetch(`${DATA_PATH}by_mandat.json`).then(r=>r.json()),
     fetch(`${DATA_PATH}by_category.json`).then(r=>r.json()),
@@ -16,11 +16,13 @@ async function load(){
     fetch(`${DATA_PATH}kpis_reel.json`).then(r=>r.json()).catch(()=>null),
     fetch(`${DATA_PATH}by_category_reel.json`).then(r=>r.json()).catch(()=>null),
     fetch(`${DATA_PATH}interets.json`).then(r=>r.json()).catch(()=>null),
+    fetch(`${DATA_PATH}timeseries.json`).then(r=>r.json()).catch(()=>null),
   ]);
-  kpis=k; byMandat=bm; byCategory=bc; cohorts=cs; kpisReel=kr; catReel=cr; interets=inter;
+  kpis=k; byMandat=bm; byCategory=bc; cohorts=cs; kpisReel=kr; catReel=cr; interets=inter; timeseries=ts;
   renderHero();
   renderQuiz();
   renderCategories();
+  renderTimeseries();
   renderReel();
   renderInterets();
   renderMandats();
@@ -28,6 +30,7 @@ async function load(){
   renderAuditTeaser();
   setupProgress();
   setupOG();
+  registerSW();
 }
 
 function renderHero(){
@@ -176,6 +179,31 @@ function renderCategories(){
       ? `Mode net (après dettes) — même hiérarchie, l'immobilier reste #1 en démo. Réel : patrimoine net baisse de ${kpisReel ? fmtPct(kpisReel.delta_net_pct) : "—"} sur N=3.`
       : `Lecture (démo) : ${byCategory[0].label} concentre ${byCategory[0].contribution_pct}% de la hausse totale.`;
   });
+}
+
+function renderTimeseries(){
+  if(!timeseries) return;
+  const ctx=document.getElementById("chart-timeseries");
+  if(!ctx) return;
+  chartTimeseries=new Chart(ctx,{
+    type:"line",
+    data:{
+      labels:timeseries.map(d=>d.annee),
+      datasets:[
+        {label:"Nominal (€)", data:timeseries.map(d=>d.nominal), borderColor:"#000091", backgroundColor:"rgba(0,0,145,0.08)", fill:true, tension:0.3},
+        {label:"Réel 2017 (€)", data:timeseries.map(d=>d.reel_2017), borderColor:"#E1000F", backgroundColor:"rgba(225,0,15,0.06)", fill:true, tension:0.3},
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{position:"bottom"}, tooltip:{callbacks:{label:ctx=> `${ctx.dataset.label}: ${fmtEur(ctx.raw)}`}}},
+      scales:{y:{ticks:{callback:v=> fmtEur(v)}}, x:{grid:{display:false}}}
+    }
+  });
+  const last=timeseries[timeseries.length-1];
+  const first=timeseries[0];
+  const inflSur=(last.nominal/last.reel_2017*100-100).toFixed(1);
+  document.getElementById("timeseries-insight").textContent=`De ${first.annee} à ${last.annee} : nominal ${fmtEur(first.nominal)} → ${fmtEur(last.nominal)} (+${((last.nominal/first.nominal-1)*100).toFixed(1)}%), réel ${fmtEur(first.reel_2017)} → ${fmtEur(last.reel_2017)} (+${((last.reel_2017/first.reel_2017-1)*100).toFixed(1)}%). Écart inflation : ${inflSur}% — l'immobilier nominal masque la perte de pouvoir d'achat 2022-23.`;
 }
 
 function renderReel(){
@@ -383,6 +411,12 @@ function setupProgress(){
       try{ await navigator.clipboard.writeText(code); alert("Code iframe copié !"); if(window.plausible) plausible('embed-copy'); }catch{ prompt("Copiez :", code); }
     };
     embedModal.onclick=(e)=>{ if(e.target===embedModal) embedModal.classList.remove("open"); };
+  }
+}
+
+function registerSW(){
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
   }
 }
 

@@ -1,0 +1,72 @@
+[
+  {
+    "annee": 2017,
+    "nominal": 285000,
+    "reel_2017": 285000,
+    "inflation": 1.0,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2018,
+    "nominal": 294588,
+    "reel_2017": 289379,
+    "inflation": 1.8,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2019,
+    "nominal": 305645,
+    "reel_2017": 296973,
+    "inflation": 1.1,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2020,
+    "nominal": 320592,
+    "reel_2017": 309947,
+    "inflation": 0.5,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2021,
+    "nominal": 335026,
+    "reel_2017": 318801,
+    "inflation": 1.6,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2022,
+    "nominal": 353961,
+    "reel_2017": 320170,
+    "inflation": 5.2,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2023,
+    "nominal": 366897,
+    "reel_2017": 316369,
+    "inflation": 4.9,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2024,
+    "nominal": 385202,
+    "reel_2017": 325640,
+    "inflation": 2.0,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2025,
+    "nominal": 397582,
+    "reel_2017": 330487,
+    "inflation": 1.7,
+    "top": "Immobilier"
+  },
+  {
+    "annee": 2026,
+    "nominal": 416254,
+    "reel_2017": 340895,
+    "inflation": 1.5,
+    "top": "Immobilier"
+  }
+]

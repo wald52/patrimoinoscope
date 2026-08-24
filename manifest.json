@@ -1,0 +1,16 @@
+{
+  "name": "Patrimoinoscope",
+  "short_name": "Patrimoinoscope",
+  "description": "Ce qui augmente vraiment dans le patrimoine des élus — HATVP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFFBF7",
+  "theme_color": "#000091",
+  "icons": [
+    {
+      "src": "./assets/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}

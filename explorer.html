@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explorer — Patrimoinoscope</title>
+<meta name="description" content="Explore les 500 déclarations d'intérêts anonymisées : mandat, participations, rémunérations.">
+<link rel="stylesheet" href="./site/style.css">
+<link rel="manifest" href="./manifest.json">
+<style>.explorer-table{width:100%;border-collapse:collapse;font-size:.85rem}.explorer-table th,.explorer-table td{border:1px solid var(--line);padding:6px 8px;text-align:left}.explorer-table th{background:#f6f6ff;position:sticky;top:0;cursor:pointer}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.filters input,.filters select{padding:6px 8px;border:1px solid var(--line);border-radius:8px;flex:1;min-width:140px}.pagination{display:flex;gap:8px;justify-content:center;margin:12px 0}</style>
+</head>
+<body>
+<header class="topbar"><div class="container inner"><div class="brand"><div class="logo">◉</div><div>Patrimoinoscope<small>explorer DI</small></div></div><nav class="nav"><a href="./index.html">← Accueil</a><a href="./audit.html">Audit</a></nav></div></header>
+<main class="container">
+<section class="hero" style="padding:24px 0">
+<h1>Explorer les intérêts — 500 DI anonymisées</h1>
+<p class="lead">Recherche par mandat, société, rémunération. Données anonymisées <code>di_*</code>, export CSV possible. Source <code>di_explorer.json</code> (87 Ko).</p>
+<div class="kpis" id="kpis-explorer"></div>
+</section>
+<section class="section card">
+<div class="filters">
+<input id="q" placeholder="Rechercher société, mandat..." aria-label="Rechercher">
+<select id="f-mandat" aria-label="Mandat"><option value="">Tous mandats</option></select>
+<select id="f-type" aria-label="Type"><option value="">Tous types</option><option>DI</option><option>DIA</option></select>
+<input id="f-minrem" type="number" placeholder="Rémunération min €" aria-label="Rémunération minimale">
+</div>
+<div style="display:flex;gap:8px;margin-bottom:8px">
+<button class="btn btn-ghost" id="btn-export">📥 Export CSV (filtré)</button>
+<span id="count" style="align-self:center;color:var(--muted);font-size:.85rem"></span>
+</div>
+<div style="max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px">
+<table class="explorer-table" id="tbl"><thead><tr><th data-sort="id_anon">ID</th><th data-sort="mandat">Mandat</th><th data-sort="type">Type</th><th data-sort="date">Date</th><th>Participations</th><th data-sort="max_rem_5ans">Max Rému 5ans</th></tr></thead><tbody id="tbody"></tbody></table>
+</div>
+<div class="pagination">
+<button class="btn btn-ghost" id="prev">← Précédent</button>
+<span id="pageinfo" style="align-self:center"></span>
+<button class="btn btn-ghost" id="next">Suivant →</button>
+</div>
+</section>
+</main>
+<script type="module">
+const fmtEur=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(n);
+let rows=[], filt=[], page=0, perPage=25, sortKey="mandat", sortAsc=true;
+async function load(){
+  const data=await fetch("./data/di_explorer.json").then(r=>r.json());
+  rows=data;
+  // populate mandat filter
+  const mandats=[...new Set(rows.map(r=>r.mandat))].sort();
+  const sel=document.getElementById("f-mandat");
+  mandats.forEach(m=>{ const o=document.createElement("option"); o.value=m; o.textContent=m; sel.appendChild(o); });
+  document.getElementById("kpis-explorer").innerHTML=`
+    <div class="kpi"><div class="label">DI échantillon</div><div class="value">${rows.length}</div><div class="hint">sur 6533 totaux</div></div>
+    <div class="kpi"><div class="label">Mandats</div><div class="value">${mandats.length}</div><div class="hint">${mandats.slice(0,3).join(", ")}</div></div>
+    <div class="kpi"><div class="label">Médiane rému</div><div class="value">${fmtEur(rows.map(r=>r.max_rem_5ans).filter(Boolean).sort((a,b)=>a-b)[Math.floor(rows.length/2)]||0)}</div><div class="hint">max 5 ans</div></div>
+  `;
+  filt=[...rows];
+  render();
+}
+function render(){
+  const q=document.getElementById("q").value.toLowerCase();
+  const fm=document.getElementById("f-mandat").value;
+  const ft=document.getElementById("f-type").value;
+  const minRem=parseInt(document.getElementById("f-minrem").value)||0;
+  filt=rows.filter(r=>{
+    if(q && !`${r.participations} ${r.mandat} ${r.id_anon}`.toLowerCase().includes(q)) return false;
+    if(fm && r.mandat!==fm) return false;
+    if(ft && r.type!==ft) return false;
+    if(minRem && r.max_rem_5ans < minRem) return false;
+    return true;
+  });
+  filt.sort((a,b)=>{
+    let va=a[sortKey], vb=b[sortKey];
+    if(typeof va==="string") va=va.toLowerCase(); if(typeof vb==="string") vb=vb.toLowerCase();
+    if(va<vb) return sortAsc?-1:1; if(va>vb) return sortAsc?1:-1; return 0;
+  });
+  document.getElementById("count").textContent=`${filt.length} résultats`;
+  const totalPages=Math.max(1, Math.ceil(filt.length/perPage));
+  if(page>=totalPages) page=totalPages-1;
+  const slice=filt.slice(page*perPage, (page+1)*perPage);
+  document.getElementById("tbody").innerHTML=slice.map(r=>`<tr><td>${r.id_anon}</td><td><span class="badge-mandat mandat-${r.mandat}">${r.mandat}</span></td><td>${r.type}</td><td>${r.date}</td><td>${r.participations||"—"}</td><td>${r.max_rem_5ans?fmtEur(r.max_rem_5ans):"—"}</td></tr>`).join("");
+  document.getElementById("pageinfo").textContent=`Page ${page+1} / ${totalPages}`;
+}
+document.getElementById("q").addEventListener("input", ()=>{page=0;render()});
+document.getElementById("f-mandat").addEventListener("change", ()=>{page=0;render()});
+document.getElementById("f-type").addEventListener("change", ()=>{page=0;render()});
+document.getElementById("f-minrem").addEventListener("input", ()=>{page=0;render()});
+document.getElementById("prev").onclick=()=>{ if(page>0){page--;render()}};
+document.getElementById("next").onclick=()=>{ page++;render() };
+document.querySelectorAll("th[data-sort]").forEach(th=>{
+  th.onclick=()=>{
+    const k=th.dataset.sort;
+    if(sortKey===k) sortAsc=!sortAsc; else {sortKey=k; sortAsc=true;}
+    render();
+  };
+});
+document.getElementById("btn-export").onclick=()=>{
+  const csv=["id_anon,mandat,type,date,participations,max_rem_5ans", ...filt.map(r=>`${r.id_anon},${r.mandat},${r.type},${r.date},"${r.participations.replace(/"/g,'""')}",${r.max_rem_5ans}`)].join("\n");
+  const blob=new Blob([csv],{type:"text/csv"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="patrimoinoscope-di.csv"; a.click();
+  try{ if(window.plausible) plausible('export-csv', {props:{n:filt.length}});}catch{}
+};
+load();
+</script>
+</body>
+</html>

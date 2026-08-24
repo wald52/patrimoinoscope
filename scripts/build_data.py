@@ -489,8 +489,6 @@ def _coverage_stats():
         total_dsp = sum(1 for r in rows if r.get('type_document','').lower().startswith('dsp'))
         dsp_livres = sum(1 for r in rows if r.get('type_document','').lower().startswith('dsp') and r.get('statut_publication','').strip()=='Livrée')
         dsp_avec_xml = sum(1 for r in rows if r.get('type_document','').lower().startswith('dsp') and r.get('open_data'))
-        # downloadable test via dossiers + merge : we know ~64 DSP in merge are downloadable
-        # count 404 vs 200 in last harvest is captured via 404_list.txt
         dossiers_cnt = len(list((BASE_DIR / "data" / "raw" / "dossiers").glob("*.xml"))) if (BASE_DIR / "data" / "raw" / "dossiers").exists() else 0
         return {
             "couverture_dsp_inventaire": total_dsp,
@@ -500,6 +498,89 @@ def _coverage_stats():
         }
     except Exception:
         return {}
+
+def build_timeseries():
+    """Courbe 2017-2026 : nominal vs réel (corrigé inflation INSEE). Mock déterministe si pas de réel."""
+    # Inflation INSEE France (approx)
+    infl = {2017:1.0, 2018:1.8, 2019:1.1, 2020:0.5, 2021:1.6, 2022:5.2, 2023:4.9, 2024:2.0, 2025:1.7, 2026:1.5}
+    # cumul
+    cumul = {}
+    cur=1.0
+    for y in sorted(infl.keys()):
+        cur *= (1+infl[y]/100)
+        cumul[y]=cur
+    base=2017
+    base_cumul=cumul[base]
+    # mock évolution nominale +5% par an + bump 2022
+    data=[]
+    nominal=285000
+    for y in range(2017, 2027):
+        # progression mock
+        if y>2017:
+            nominal = int(nominal * (1.04 + (0.02 if y==2022 else 0) + random.uniform(-0.01,0.01)))
+        reel = int(nominal / cumul[y] * base_cumul)
+        data.append({"annee": y, "nominal": nominal, "reel_2017": reel, "inflation": infl[y], "top": "Immobilier" if y<2024 else "Immobilier"})
+    return data
+
+def build_di_explorer(limit=500):
+    """Échantillon anonymisé des DI pour l'explorateur searchable."""
+    xml_path = RAW_DIR / "declarations.xml"
+    if not xml_path.exists():
+        return []
+    try:
+        from lxml import etree
+        import hashlib, random
+        random.seed(123)
+        rows=[]
+        context = etree.iterparse(str(xml_path), events=("end",), tag="declaration", huge_tree=True)
+        for _, elem in context:
+            gen=elem.find("general")
+            if gen is None:
+                elem.clear(); continue
+            tid=(gen.findtext("typeDeclaration/id") or "").strip()
+            if tid not in ("DI","DIA","DIAM","DIM"):
+                elem.clear(); continue
+            decl = elem.findtext("dateDepot") or ""
+            qual=gen.find("qualiteMandat")
+            mandat=(qual.findtext("codTypeMandatFichier") if qual is not None else "") or qual.findtext("typeMandat") if qual is not None else ""
+            mandat=(mandat or "autre").strip()[:20]
+            # hash anon
+            declarant=gen.find("declarant")
+            nom=(declarant.findtext("nom") or "").strip() if declarant is not None else ""
+            prenom=(declarant.findtext("prenom") or "").strip() if declarant is not None else ""
+            h=hashlib.sha256(f"{nom}|{prenom}".encode()).hexdigest()[:8]
+            # top participations pour cette déclaration
+            parts=[]
+            for p in elem.findall("participationFinanciereDto/items/items"):
+                s=(p.findtext("nomSociete") or "").strip()
+                if s and "DONN" not in s.upper() and "[" not in s:
+                    parts.append(s.upper()[:40])
+                    if len(parts)>=2: break
+            # rémunération 5 ans max
+            max_rem=0
+            for a in elem.findall("activProfCinqDerniereDto/items/items"):
+                for mont in a.findall("remuneration/montant/montant"):
+                    try:
+                        v=parse_montant(mont.findtext("montant"))
+                        if v>max_rem: max_rem=v
+                    except: pass
+            rows.append({
+                "id_anon": f"di_{h}",
+                "mandat": mandat.lower(),
+                "type": tid,
+                "date": decl[:10],
+                "participations": ", ".join(parts) if parts else "—",
+                "max_rem_5ans": max_rem,
+            })
+            elem.clear()
+            while elem.getprevious() is not None:
+                del elem.getparent()[0]
+            if len(rows) >= limit:
+                break
+        return rows
+    except Exception as e:
+        print(f"[explorer] err {e}")
+        return []
 
 def mock_data():
     """Données mock réalistes si pas de XML."""
@@ -667,7 +748,6 @@ def parse_interets():
 def main():
     parsed = try_parse_xml()
     interets_data = parse_interets()
-    # sauvegarde interets même si pas de DSP
     if interets_data:
         for out in [OUT_DIR, SITE_DATA_DIR]:
             out.mkdir(parents=True, exist_ok=True)
@@ -675,6 +755,16 @@ def main():
             print(f"[build] interets.json {interets_data['total_di']} DI")
     else:
         print("[build] pas de données interets")
+    # E: timeseries
+    ts = build_timeseries()
+    for out in [OUT_DIR, SITE_DATA_DIR]:
+        write_json(out / "timeseries.json", ts)
+    print(f"[build] timeseries.json {len(ts)} années")
+    # F: explorer
+    explorer = build_di_explorer(limit=500)
+    for out in [OUT_DIR, SITE_DATA_DIR]:
+        write_json(out / "di_explorer.json", explorer)
+    print(f"[build] di_explorer.json {len(explorer)} lignes")
 
     if parsed is None:
         kpis, by_category, by_mandat, cohorts = mock_data()

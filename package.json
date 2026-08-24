@@ -1,0 +1,11 @@
+{
+  "name": "patrimoinoscope",
+  "private": true,
+  "devDependencies": {
+    "@axe-core/playwright": "^4.9.0",
+    "@playwright/test": "^1.44.0"
+  },
+  "scripts": {
+    "test:e2e": "npx playwright test"
+  }
+}
