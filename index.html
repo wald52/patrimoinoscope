@@ -50,6 +50,7 @@
         </div>
         <div class="progress" aria-hidden="true"><span id="read-progress"></span></div>
         <p class="notice" style="margin-top:12px">Mise à jour : <span id="kpi-date">—</span> · Source : HATVP open data · <span id="kpi-n-paires">—</span> paires · Durée moyenne <span id="kpi-duree">—</span> ans</p>
+        <div id="limit-banner" class="notice" style="display:none;margin-top:10px;border-color:#E1000F;background:#fff0f0;color:#5a0000"></div>
       </div>
       <div class="card quiz" id="quiz">
         <h2>🎯 Quiz express (15s)</h2>
@@ -116,14 +117,15 @@
 
   <!-- METHODE -->
   <section class="section card" id="methode">
-    <h2>Méthode & limites</h2>
+    <h2>Méthode & limites — audit V2 24/08/2026</h2>
     <ul style="color:var(--muted)">
-      <li><strong>Sources :</strong> <a href="https://www.hatvp.fr/open-data/" target="_blank" rel="noopener">hatvp.fr/open-data</a> — <code>liste.csv</code> + <code>declarations.xml</code> (Licence Ouverte 2.0 Etalab). Aussi sur data.gouv.fr.</li>
-      <li><strong>Couverture :</strong> toutes les déclarations <em>publiées</em> en open data (DSP/DSPM). Les DSP non publiées ne sont pas dans l'open data par design.</li>
-      <li><strong>Appariement :</strong> hash interne <code>nom+prenom+dateNaissance</code> + même <code>cat_mandat</code>, tri par <code>dateDepot</code>. Paires entrée/sortie avec durée ≥ 0.5 an. Flag <code>evenement_majeur</code> (héritage/donation) isolé.</li>
-      <li><strong>Anonymisation :</strong> agrégats si <code>N≥10</code>, 20 profils <code>anon_*</code> avec tranche d'âge et type de mandat uniquement. Aucune donnée nominative publiée.</li>
-      <li><strong>Catégories :</strong> Immobilier (immeuble + SCI, quote-part appliquée) · Bourse · Assurance-vie · Épargne bancaire · Véhicules · Autres. Net = brut − passif.</li>
-      <li><strong>Reproductible :</strong> <code>scripts/download.py</code> + <code>scripts/build_data.py</code> → 4 JSON. Relance hebdo via GitHub Actions.</li>
+      <li><strong>Sources :</strong> <a href="https://www.hatvp.fr/open-data/" target="_blank" rel="noopener">hatvp.fr/open-data</a> — <code>liste.csv</code> (13330 lignes) + <code>declarations.xml</code> (6608 décl., 88 Mo) — Licence Ouverte 2.0. Harvest V2 : 2315 XML individuels testés via <code>livraison/dossiers</code> (tous déjà dans le merge, superset).</li>
+      <li><strong>Couverture réelle :</strong> DSP inventaire 2633, Livrées 2344, avec XML 2343, mais <strong>téléchargeables 75</strong> (64 DSP + 11 DSPFM). Les DSP députés/sénateurs/europe retournent <code>404</code> : <em>Consultable en préfecture uniquement</em> (ex: <code>lahmar-abdelkader-dsp31970-depute-69.xml</code> 404). Détail : <a href="./docs/DATA.md">docs/DATA.md</a>.</li>
+      <li><strong>Conséquence :</strong> appariement entrée/sortie possible sur <code>3 paires</code> seulement (même mandat, durée ≥0.5 an). Le site affiche donc un <strong>mock déterministe</strong> (184 paires) en attendant une ouverture légale — bascule auto si <code>N≥10</code>. Voir <code>kpis.json:mode=mock,n_paires_reel=3</code>.</li>
+      <li><strong>Appariement :</strong> hash interne <code>nom+prenom+dateNaissance</code> + même <code>cat_mandat</code>, tri par <code>dateDepot</code>. Flag <code>evenement_majeur</code> isolé.</li>
+      <li><strong>Anonymisation :</strong> agrégats si <code>N≥10</code>, 20 profils <code>anon_*</code> avec tranche d'âge et type de mandat uniquement. Aucune donnée nominative publiée (<code>grep -r Baptiste data/</code> vide).</li>
+      <li><strong>Catégories :</strong> Immobilier (immeuble + SCI, quote-part) · Bourse · Assurance-vie · Épargne bancaire · Véhicules · Autres. Net = brut − passif. Structure : <code>opendata-structure.xlsx:257</code> champs.</li>
+      <li><strong>Reproductible :</strong> <code>scripts/download.py</code> + <code>scripts/harvest.py</code> + <code>scripts/build_data.py</code> → 4 JSON. Relance hebdo via GitHub Actions. Exhaustif pour le téléchargeable.</li>
     </ul>
     <div class="share">
       <button class="btn btn-primary" id="btn-share2">Partager le site</button>

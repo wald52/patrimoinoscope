@@ -34,27 +34,37 @@ SITE_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- helpers ---
 def try_parse_xml():
-    """Tente de parser le vrai XML HATVP, sinon retourne None pour fallback mock."""
+    """Tente de parser le vrai XML HATVP (merge + dossiers individuels), sinon fallback mock."""
     xml_path = RAW_DIR / "declarations.xml"
+    dossiers_dir = RAW_DIR / "dossiers"
     csv_path = RAW_DIR / "liste.csv"
-    if not xml_path.exists():
-        print(f"[build] {xml_path} absent -> mode MOCK")
+    # collecte des sources XML : merge + dossiers individuels (si présents)
+    sources = []
+    if xml_path.exists():
+        sources.append(xml_path)
+    if dossiers_dir.exists():
+        # dossiers contient des XML individuels, tous sont des <declaration> seuls, pas <declarations>
+        # on les ajoutera après le merge
+        dossier_files = list(dossiers_dir.glob("*.xml"))
+        # si dossiers est superset, on peut l'ignorer, mais on vérifie déduplication par uuid
+        print(f"[build] dossiers individuels trouvés: {len(dossier_files)}")
+        # on ne parse pas dossiers ici, on le fera après pour déduplication
+    if not sources:
+        print(f"[build] aucun XML trouvé -> mode MOCK")
         return None
     try:
-        size = xml_path.stat().st_size
-        print(f"[build] parsing {xml_path} ({size} bytes)...")
-        # lxml iterparse pour ne pas charger 88 Mo en RAM
+        size = xml_path.stat().st_size if xml_path.exists() else 0
+        print(f"[build] parsing {xml_path} ({size} bytes) + dossiers...")
         from lxml import etree
-        # Compter d'abord les types pour debug
         type_counter = Counter()
-        # On va collecter les DSP uniquement
         declarations = []
-        context = etree.iterparse(str(xml_path), events=("end",), tag="declaration", huge_tree=True)
+        seen_uuids = set()
+        # 1) parse merge
+        context = etree.iterparse(str(xml_path), events=("end",), tag="declaration", huge_tree=True) if xml_path.exists() else []
         count = 0
         dsp_count = 0
         for event, elem in context:
             count += 1
-            # typeDeclaration id
             gen = elem.find("general")
             if gen is None:
                 elem.clear()
@@ -62,8 +72,11 @@ def try_parse_xml():
             type_el = gen.find("typeDeclaration/id")
             type_id = type_el.text.strip() if type_el is not None and type_el.text else ""
             type_counter[type_id] += 1
-            if type_id not in ("DSP", "DSPM", "DSPFM", "DSPModif", "DSPF"):
-                # on garde seulement patrimoine
+            # Track uuid for dedup
+            uuid = elem.findtext("uuid")
+            if uuid:
+                seen_uuids.add(uuid)
+            if type_id not in ("DSP", "DSPM", "DSPFM", "DSPModif", "DSPF", "DSPFAM"):
                 elem.clear()
                 continue
             # extraire patrimoine
@@ -82,10 +95,46 @@ def try_parse_xml():
                 print(f"  ... {count} declarations vues, {dsp_count} DSP collectées")
             # limite safety pour dev local si besoin
             # if count > 2000: break
-        print(f"[build] total declarations: {count}")
-        print(f"[build] types: {type_counter}")
-        print(f"[build] DSP collectées: {len(declarations)}")
-        # Si trop peu, fallback mock enrichi
+        print(f"[build] total declarations (merge): {count}")
+        print(f"[build] types (merge): {type_counter}")
+        print(f"[build] DSP collectées (merge): {len(declarations)}")
+        # 2) parse dossiers individuels pour compléter (ceux non présents dans merge)
+        if dossiers_dir.exists():
+            dossier_files = list(dossiers_dir.glob("*.xml"))
+            added = 0
+            for p in dossier_files:
+                try:
+                    tree = etree.parse(str(p))
+                    root = tree.getroot()
+                    # root peut être <declaration> ou <declarations>
+                    decls = [root] if root.tag == "declaration" else root.findall("declaration") if root.tag == "declarations" else []
+                    for elem in decls:
+                        uuid = elem.findtext("uuid")
+                        if uuid and uuid in seen_uuids:
+                            continue
+                        gen = elem.find("general")
+                        if gen is None:
+                            continue
+                        type_id = (gen.findtext("typeDeclaration/id") or "").strip()
+                        type_counter[type_id] += 1
+                        if uuid:
+                            seen_uuids.add(uuid)
+                        if type_id not in ("DSP", "DSPM", "DSPFM", "DSPModif", "DSPF", "DSPFAM"):
+                            continue
+                        try:
+                            data = extract_patrimoine(elem)
+                            if data:
+                                declarations.append(data)
+                                added += 1
+                        except Exception as e:
+                            print(f"  warn dossiers DSP {p.name}: {e}")
+                except Exception as e:
+                    print(f"  warn parse {p.name}: {e}")
+            if added:
+                print(f"[build] dossiers: +{added} DSP supplémentaires (total {len(declarations)})")
+            else:
+                print(f"[build] dossiers: aucun DSP supplémentaire (merge déjà superset, dossiers={len(dossier_files)})")
+        print(f"[build] total DSP final: {len(declarations)} / {len(seen_uuids)} uuids uniques")
         if len(declarations) < 20:
             print("[build] trop peu de DSP pour appariement -> enrichissement mock")
             return declarations if declarations else None
@@ -283,6 +332,7 @@ def build_aggregates(pairs):
     # kpis
     N = len(pairs)
     duree_moy = sum(p["duree_a"] for p in pairs) / N if N else 0
+    cov = _coverage_stats()
     # moyennes entrée/sortie net
     entree_net_moy = sum(p["entree"]["net"] for p in pairs) / N
     sortie_net_moy = sum(p["sortie"]["net"] for p in pairs) / N
@@ -338,6 +388,8 @@ def build_aggregates(pairs):
             "top_categorie": top_mandat,
         })
 
+    has_dossiers = (BASE_DIR / "data" / "raw" / "dossiers").exists() and len(list((BASE_DIR / "data" / "raw" / "dossiers").glob("*.xml"))) > 0
+    source_label = "HATVP open data (declarations.xml + liste.csv + dossiers individuels)" if has_dossiers else "HATVP open data (declarations.xml + liste.csv)"
     kpis = {
         "n_paires": N,
         "n_declarations": len(pairs)*2,
@@ -349,8 +401,9 @@ def build_aggregates(pairs):
         "top_categorie": top_cat,
         "top_categorie_delta": by_category_sorted[0]["delta_moyen"] if by_category_sorted else 0,
         "date_generation": datetime.now().strftime("%Y-%m-%d"),
-        "source": "HATVP open data (declarations.xml + liste.csv)",
+        "source": source_label,
         "licence": "Licence Ouverte 2.0 Etalab",
+        **cov,
     }
     return kpis, by_category_sorted, by_mandat
 
@@ -424,11 +477,36 @@ def build_cohorts(pairs, n=20):
         })
     return cohorts
 
+def _coverage_stats():
+    """Retourne stats inventaire liste.csv pour kpis."""
+    try:
+        import csv
+        liste_path = BASE_DIR / "data" / "raw" / "liste.csv"
+        if not liste_path.exists():
+            return {}
+        with open(liste_path, encoding='utf-8', errors='replace') as f:
+            rows = list(csv.DictReader(f, delimiter=';'))
+        total_dsp = sum(1 for r in rows if r.get('type_document','').lower().startswith('dsp'))
+        dsp_livres = sum(1 for r in rows if r.get('type_document','').lower().startswith('dsp') and r.get('statut_publication','').strip()=='Livrée')
+        dsp_avec_xml = sum(1 for r in rows if r.get('type_document','').lower().startswith('dsp') and r.get('open_data'))
+        # downloadable test via dossiers + merge : we know ~64 DSP in merge are downloadable
+        # count 404 vs 200 in last harvest is captured via 404_list.txt
+        dossiers_cnt = len(list((BASE_DIR / "data" / "raw" / "dossiers").glob("*.xml"))) if (BASE_DIR / "data" / "raw" / "dossiers").exists() else 0
+        return {
+            "couverture_dsp_inventaire": total_dsp,
+            "couverture_dsp_livres": dsp_livres,
+            "couverture_dsp_avec_xml": dsp_avec_xml,
+            "couverture_dossiers_telecharges": dossiers_cnt,
+        }
+    except Exception:
+        return {}
+
 def mock_data():
     """Données mock réalistes si pas de XML."""
     print("[build] génération MOCK déterministe (seed 42)")
     random.seed(42)
     cats = ["immobilier","valeurs_bourse","assurance_vie","epargne","vehicules","autres"]
+    cov = _coverage_stats()
     # kpis mock cohérents avec presse 2024-2026 : immobilier tire
     kpis = {
         "n_paires": 184,
@@ -443,7 +521,9 @@ def mock_data():
         "date_generation": datetime.now().strftime("%Y-%m-%d"),
         "source": "HATVP open data (MOCK déterministe — en attente du vrai XML)",
         "licence": "Licence Ouverte 2.0 Etalab",
-        "mode": "mock"
+        "mode": "mock",
+        **cov,
+        "limite_legale": "DSP députés/sénateurs : consultables en préfecture uniquement (404 sur livraison/dossiers), non téléchargeables en open data — voir docs/DATA.md",
     }
     by_category = [
         {"categorie":"immobilier","label":"Immobilier","debut_moyen":165000,"fin_moyenne":206000,"delta_moyen":41000,"delta_pct":24.8,"contribution_pct":66.1},

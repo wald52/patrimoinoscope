@@ -12,5 +12,10 @@
   "source": "HATVP open data (MOCK déterministe — en attente du vrai XML)",
   "licence": "Licence Ouverte 2.0 Etalab",
   "mode": "mock",
+  "couverture_dsp_inventaire": 2633,
+  "couverture_dsp_livres": 2344,
+  "couverture_dsp_avec_xml": 2343,
+  "couverture_dossiers_telecharges": 2315,
+  "limite_legale": "DSP députés/sénateurs : consultables en préfecture uniquement (404 sur livraison/dossiers), non téléchargeables en open data — voir docs/DATA.md",
   "n_paires_reel": 3
 }

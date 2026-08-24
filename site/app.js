@@ -29,9 +29,19 @@ function renderHero(){
   document.getElementById("kpi-date").textContent = kpis.date_generation;
   document.getElementById("kpi-n-paires").textContent = kpis.n_paires;
   document.getElementById("kpi-duree").textContent = kpis.duree_moyenne_annees;
+  // banner mock / limite légale
+  if(kpis.mode==="mock"){
+    const banner=document.getElementById("limit-banner");
+    banner.style.display="block";
+    banner.innerHTML=`⚠️ Données réelles insuffisantes : <strong>${kpis.n_paires_reel ?? 3} paires</strong> appariables seulement (75 DSP téléchargeables sur ${kpis.couverture_dsp_inventaire ?? 2633} à l'inventaire). Les DSP députés/sénateurs sont <em>consultables en préfecture uniquement</em> (404) — site en <strong>mode démo</strong> avec données mock. <a href="./docs/DATA.md" style="text-decoration:underline">Voir l'audit V2</a>.`;
+  } else if(kpis.limite_legale){
+    const banner=document.getElementById("limit-banner");
+    banner.style.display="block";
+    banner.textContent=kpis.limite_legale;
+  }
   const kpisEl = document.getElementById("kpis");
   kpisEl.innerHTML = `
-    <div class="kpi"><div class="label">Patrimoine net moyen — entrée</div><div class="value numeral">${fmtEur(kpis.entree_net_moyen)}</div><div class="hint">moyenne sur ${kpis.n_paires} paires</div></div>
+    <div class="kpi"><div class="label">Patrimoine net moyen — entrée</div><div class="value numeral">${fmtEur(kpis.entree_net_moyen)}</div><div class="hint">moyenne sur ${kpis.n_paires} paires ${kpis.mode==="mock" ? "(mock)" : ""}</div></div>
     <div class="kpi"><div class="label">Patrimoine net moyen — sortie</div><div class="value numeral">${fmtEur(kpis.sortie_net_moyen)}</div><div class="hint">${fmtPct(kpis.delta_net_pct)} en ${kpis.duree_moyenne_annees} ans</div></div>
     <div class="kpi"><div class="label">Hausse moyenne (net)</div><div class="value numeral" style="color:var(--ok)">${fmtEur(kpis.delta_net_moyen)}</div><div class="hint">Top catégorie : ${kpis.top_categorie}</div></div>
   `;
