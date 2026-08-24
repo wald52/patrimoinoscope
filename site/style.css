@@ -114,3 +114,29 @@ h1{font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:10px 0 14px;letter-spa
 .close{float:right;border:0;background:#f0f0f0;width:32px;height:32px;border-radius:999px;cursor:pointer}
 .skip:focus{left:12px !important;top:12px !important;width:auto !important;height:auto !important;overflow:visible !important;background:var(--blue);color:white;padding:8px 12px;border-radius:8px;z-index:100}
 .btn:focus-visible{outline-offset:2px}
+/* dark mode */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0a0a14;--card:#141428;--ink:#e9e9ff;--muted:#9aa0c0;--line:#2a2a4a}
+  body{background:var(--bg);color:var(--ink)}
+  .topbar{background:rgba(10,10,20,.92)}
+  .kpi,.card,.cohort,.modal-card{background:var(--card);border-color:var(--line)}
+  .choice{background:var(--card)}
+  .notice{background:#1a1a2e;border-color:var(--line);color:var(--muted)}
+  .progress{background:#2a2a4a}
+}
+/* print */
+@media print{
+  .topbar,.share,.quiz,.slider,.modal{display:none !important}
+  body{background:white;color:black}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+  a{color:black;text-decoration:underline}
+  .chart-wrap{height:260px !important}
+}
+/* onboarding */
+.onboard{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;place-items:center;z-index:60;padding:20px}
+.onboard.open{display:grid}
+.onboard-card{max-width:520px;background:white;border-radius:16px;padding:22px;text-align:center}
+.onboard-card h3{margin:0 0 8px}
+.onboard-dots{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.onboard-dots span{width:10px;height:10px;border-radius:999px;background:var(--line)}
+.onboard-dots span.active{background:var(--blue)}

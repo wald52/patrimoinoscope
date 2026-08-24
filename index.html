@@ -58,13 +58,16 @@
           <!-- rempli par JS -->
         </div>
         <div class="progress" aria-hidden="true"><span id="read-progress"></span></div>
-        <p class="notice" style="margin-top:12px">Mise à jour : <span id="kpi-date">—</span> · Source : HATVP open data · <span id="kpi-n-paires">—</span> paires · Durée moyenne <span id="kpi-duree">—</span> ans · <a href="./audit.html">Voir l'audit</a></p>
+        <p class="notice" style="margin-top:12px">Mise à jour : <span id="kpi-date">—</span> · Source : HATVP open data · <span id="kpi-n-paires">—</span> paires · Durée moyenne <span id="kpi-duree">—</span> ans · <span id="freshness" style="margin-left:8px;padding:2px 8px;border-radius:999px;background:#eaf6ef;border:1px solid #b7e0c8;font-size:.75rem">—</span> · <a href="./audit.html">Voir l'audit</a></p>
+        <p class="notice" style="margin-top:6px">Prochaine MàJ : <strong>lundi 06:00</strong> (cron HATVP) · <a href="./data/kpis.json" download>Télécharger kpis.json</a> · <a href="./data/interets.json" download>interets.json</a> · <a href="./data/audit.json" download>audit.json</a></p>
         <div id="limit-banner" class="notice" style="display:none;margin-top:10px;border-color:#E1000F;background:#fff0f0;color:#5a0000" role="alert"></div>
         <div class="share" style="margin-top:10px">
           <button class="btn btn-primary" id="btn-og">📸 Générer l'image à partager</button>
           <a class="btn btn-ghost" href="./assets/og-image.png" target="_blank" rel="noopener">Voir l'OG image</a>
+          <button class="btn btn-ghost" id="btn-embed" title="Copier iframe">⟨/⟩ Intégrer</button>
         </div>
         <canvas id="og-canvas" width="1200" height="630" style="display:none"></canvas>
+        <canvas id="perso-canvas" width="800" height="420" style="display:none"></canvas>
       </div>
       <div class="card quiz" id="quiz" aria-labelledby="quiz-title">
         <h2 id="quiz-title">🎯 Quiz express (15s)</h2>
@@ -200,6 +203,30 @@
     <p id="modal-meta" style="color:var(--muted);font-size:.9rem">—</p>
     <div class="chart-wrap sm"><canvas id="modal-chart" aria-label="Détail profil" role="img"></canvas></div>
     <p class="notice" id="modal-insight">—</p>
+  </div>
+</div>
+
+<!-- onboarding 3 étapes -->
+<div class="onboard" id="onboard" aria-hidden="true">
+  <div class="onboard-card">
+    <h3 id="onboard-title">Bienvenue 👋</h3>
+    <p id="onboard-text" style="color:var(--muted)">Découvre en 30s comment lire le patrimoine des élus.</p>
+    <div class="onboard-dots" aria-hidden="true"><span class="active"></span><span></span><span></span></div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn btn-ghost" id="onboard-skip">Passer</button>
+      <button class="btn btn-primary" id="onboard-next">Suivant →</button>
+    </div>
+  </div>
+</div>
+
+<!-- embed modal -->
+<div class="modal" id="embed-modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="close" id="embed-close" aria-label="Fermer">✕</button>
+    <h3>Intégrer le quiz</h3>
+    <p style="color:var(--muted)">Copiez ce code sur votre blog :</p>
+    <pre style="background:#f6f6ff;padding:12px;border-radius:8px;overflow:auto;font-size:.8rem"><code>&lt;iframe src="https://lemodelesocialfrancais.github.io/patrimoinoscope/#quiz" width="100%" height="420" style="border:0;border-radius:12px" loading="lazy"&gt;&lt;/iframe&gt;</code></pre>
+    <button class="btn btn-primary" id="embed-copy">Copier le code</button>
   </div>
 </div>
 

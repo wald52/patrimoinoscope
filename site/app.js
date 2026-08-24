@@ -72,6 +72,29 @@ function renderQuiz(){
         : `Presque ! La bonne réponse est <strong>${labels[correct] || correct}</strong> : <strong>${fmtEur(top.delta_moyen)}</strong> (${fmtPct(top.delta_pct)}). L'immobilier tire 2/3 de la hausse.`;
       result.classList.add("show");
       share.style.display="flex";
+      // perso card bouton
+      const persoCanvas=document.getElementById("perso-canvas");
+      if(persoCanvas && !document.getElementById("btn-perso")){
+        setTimeout(()=>{
+          const ctx=persoCanvas.getContext("2d");
+          ctx.fillStyle="#FFFBF7"; ctx.fillRect(0,0,800,420);
+          ctx.fillStyle="#000091"; ctx.fillRect(0,0,800,8);
+          ctx.fillStyle="#1a1a2e"; ctx.font="800 28px Inter, sans-serif"; ctx.fillText("Mon quiz Patrimoinoscope", 30, 50);
+          ctx.fillStyle="#5a5a6e"; ctx.font="600 16px Inter, sans-serif"; ctx.fillText(`Mon choix : ${ans} — Réponse : ${correct} (${ok?"✅":"❌"})`, 30, 80);
+          ctx.fillStyle="#0a7d48"; ctx.font="800 22px Inter, sans-serif"; ctx.fillText(`Top : ${kpis.top_categorie} ${fmtEur(kpis.top_categorie_delta)}`, 30, 130);
+          ctx.fillStyle="#5a5a6e"; ctx.font="500 14px Inter, sans-serif"; ctx.fillText(`patrimoinoscope — ${kpis.n_paires} paires`, 30, 380);
+          const b=document.createElement("button");
+          b.id="btn-perso"; b.className="btn btn-ghost"; b.textContent="📸 Ma carte perso";
+          b.onclick=()=>{
+            const a=document.createElement("a");
+            a.download="patrimoinoscope-perso.png";
+            a.href=persoCanvas.toDataURL("image/png");
+            a.click();
+            try{ if(window.plausible) plausible('perso-card'); }catch{}
+          };
+          share.appendChild(b);
+        }, 300);
+      }
       if(navigator.vibrate && ok) navigator.vibrate(60);
     });
   });
@@ -318,6 +341,49 @@ function setupProgress(){
     bar.style.width = pct+"%";
   };
   addEventListener("scroll", onScroll, {passive:true});
+  // freshness badge
+  const fresh=document.getElementById("freshness");
+  if(fresh && kpis.date_generation){
+    const d=new Date(kpis.date_generation);
+    const diff=Math.floor((Date.now()-d)/86400000);
+    fresh.textContent= diff<=7 ? "✓ À jour" : `MàJ il y a ${diff}j`;
+    fresh.style.background= diff<=7 ? "#eaf6ef" : "#fff0f0";
+    fresh.style.borderColor= diff<=7 ? "#b7e0c8" : "#e0b7b7";
+  }
+  // onboarding 3 étapes
+  const onboard=document.getElementById("onboard");
+  if(onboard && !localStorage.getItem("onboard_done")){
+    const steps=[
+      {t:"1/3 — Le patrimoine", d:"Le graphique #1 montre la hausse moyenne par catégorie (démo)."},
+      {t:"2/3 — Le quiz", d:"Teste ton intuition : qu'est-ce qui augmente le plus ?"},
+      {t:"3/3 — Les intérêts", d:"On a 6533 DI : découvre les participations et rémunérations."},
+    ];
+    let idx=0;
+    function show(i){
+      document.getElementById("onboard-title").textContent=steps[i].t;
+      document.getElementById("onboard-text").textContent=steps[i].d;
+      document.querySelectorAll(".onboard-dots span").forEach((el,j)=> el.classList.toggle("active", j===i));
+      document.getElementById("onboard-next").textContent= i===2 ? "C'est parti !" : "Suivant →";
+    }
+    onboard.classList.add("open"); onboard.setAttribute("aria-hidden","false"); show(0);
+    document.getElementById("onboard-next").onclick=()=>{
+      if(idx<2){ idx++; show(idx); } else { onboard.classList.remove("open"); localStorage.setItem("onboard_done","1"); try{ if(window.plausible) plausible('onboard-complete'); }catch{} }
+    };
+    document.getElementById("onboard-skip").onclick=()=>{ onboard.classList.remove("open"); localStorage.setItem("onboard_done","1"); };
+    onboard.onclick=(e)=>{ if(e.target===onboard){ onboard.classList.remove("open"); localStorage.setItem("onboard_done","1"); }};
+  }
+  // embed modal
+  const embedBtn=document.getElementById("btn-embed");
+  const embedModal=document.getElementById("embed-modal");
+  if(embedBtn){
+    embedBtn.onclick=()=>{ embedModal.classList.add("open"); embedModal.setAttribute("aria-hidden","false"); };
+    document.getElementById("embed-close").onclick=()=> embedModal.classList.remove("open");
+    document.getElementById("embed-copy").onclick=async()=>{
+      const code=`<iframe src="https://lemodelesocialfrancais.github.io/patrimoinoscope/#quiz" width="100%" height="420" style="border:0;border-radius:12px" loading="lazy"></iframe>`;
+      try{ await navigator.clipboard.writeText(code); alert("Code iframe copié !"); if(window.plausible) plausible('embed-copy'); }catch{ prompt("Copiez :", code); }
+    };
+    embedModal.onclick=(e)=>{ if(e.target===embedModal) embedModal.classList.remove("open"); };
+  }
 }
 
 function setupOG(){

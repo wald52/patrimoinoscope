@@ -1,0 +1,23 @@
+name: Lighthouse CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: npm install -g @lhci/cli@0.13.x
+      - name: Run Lighthouse
+        run: |
+          python -m http.server 8000 &
+          sleep 2
+          lhci autorun --collect.url=http://localhost:8000/index.html --collect.url=http://localhost:8000/audit.html --assert.preset=lighthouse:recommended || echo "Lighthouse done (warnings allowed)"
