@@ -38,9 +38,9 @@
 <script type="module">
 const fmtNum=n=>new Intl.NumberFormat("fr-FR").format(n);
 async function load(){
-  const [kpis, liste] = await Promise.all([
+  const [kpis, audit] = await Promise.all([
     fetch("./data/kpis.json").then(r=>r.json()),
-    fetch("./data/liste.csv").then(r=>r.text()).catch(()=>null)
+    fetch("./data/audit.json").then(r=>r.json()).catch(()=>null)
   ]);
   document.getElementById("audit-kpis").innerHTML=`
     <div class="kpi"><div class="label">Inventaire DSP</div><div class="value">${fmtNum(kpis.couverture_dsp_inventaire)}</div><div class="hint">1052+1185+396</div></div>
@@ -49,13 +49,7 @@ async function load(){
   `;
   // parse liste.csv Ã©chantillon
   if(liste){
-    const lines=liste.split("\n");
-    const header=lines[0].split(";");
-    const rows=lines.slice(1,1001).map(l=>{
-      const cols=l.split(";");
-      const o={}; header.forEach((h,i)=>o[h]=cols[i]||"");
-      return o;
-    }).filter(r=>r.civilite);
+    const rows=audit.sample;
     const tbody=document.getElementById("tbody");
     function render(){
       const q=document.getElementById("q").value.toLowerCase();

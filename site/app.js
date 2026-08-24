@@ -87,14 +87,18 @@ function renderQuiz(){
 
 async function shareSite(){
   const text = `Patrimoinoscope : entre le début et la fin du mandat, le patrimoine net moyen passe de ${fmtEur(kpis.entree_net_moyen)} à ${fmtEur(kpis.sortie_net_moyen)} (${fmtPct(kpis.delta_net_pct)}). Le poste #1 : ${kpis.top_categorie}. Données HATVP anonymisées.`;
-  const url = location.href;
+  const url = new URL(location.href);
+  url.searchParams.set('utm_source','share'); url.searchParams.set('utm_medium','kpi'); url.searchParams.set('utm_campaign', encodeURIComponent(kpis.top_categorie));
+  const shareUrl = url.toString();
+  // plausible
+  try{ if(window.plausible) window.plausible('share', {props:{top:kpis.top_categorie}}); }catch{}
   if(navigator.share){
-    try{ await navigator.share({title:document.title, text, url}); }catch{}
+    try{ await navigator.share({title:document.title, text, url:shareUrl}); }catch{}
   } else if(navigator.clipboard){
-    await navigator.clipboard.writeText(`${text} ${url}`);
-    alert("Lien copié !");
+    await navigator.clipboard.writeText(`${text} ${shareUrl}`);
+    alert("Lien KPI copié !");
   } else {
-    prompt("Copie ce lien :", `${text} ${url}`);
+    prompt("Copie ce lien :", `${text} ${shareUrl}`);
   }
 }
 
@@ -320,23 +324,19 @@ function setupOG(){
   const btn=document.getElementById("btn-og");
   if(!btn) return;
   btn.addEventListener("click", ()=>{
+    try{ if(window.plausible) window.plausible('generate-og'); }catch{}
     const canvas=document.getElementById("og-canvas");
     const ctx=canvas.getContext("2d");
-    // fond
     ctx.fillStyle="#FFFBF7"; ctx.fillRect(0,0,1200,630);
-    // barre top
     ctx.fillStyle="#000091"; ctx.fillRect(0,0,1200,12);
-    // titre
     ctx.fillStyle="#1a1a2e"; ctx.font="800 54px Inter, sans-serif"; ctx.fillText("Patrimoinoscope", 60, 100);
-    ctx.font="600 22px Inter, sans-serif"; ctx.fillStyle="#6b6b7a"; ctx.fillText("Ce qui augmente vraiment pendant un mandat — HATVP", 60, 140);
-    // kpis
+    ctx.font="600 22px Inter, sans-serif"; ctx.fillStyle="#5a5a6e"; ctx.fillText("Ce qui augmente vraiment pendant un mandat — HATVP", 60, 140);
     ctx.fillStyle="#000091"; ctx.font="800 44px Inter, sans-serif"; ctx.fillText(`${fmtPct(kpis.delta_net_pct)} en ${kpis.duree_moyenne_annees} ans`, 60, 250);
     ctx.font="600 20px Inter, sans-serif"; ctx.fillStyle="#1a1a2e"; ctx.fillText(`Patrimoine net : ${fmtEur(kpis.entree_net_moyen)} → ${fmtEur(kpis.sortie_net_moyen)}`, 60, 290);
     ctx.fillStyle="#0a7d48"; ctx.font="800 36px Inter, sans-serif"; ctx.fillText(`Top : ${kpis.top_categorie} ${fmtEur(kpis.top_categorie_delta)}`, 60, 350);
-    ctx.fillStyle="#6b6b7a"; ctx.font="500 18px Inter, sans-serif"; ctx.fillText(`Source : HATVP open data · ${kpis.n_paires} paires · Licence Ouverte 2.0`, 60, 400);
+    ctx.fillStyle="#5a5a6e"; ctx.font="500 18px Inter, sans-serif"; ctx.fillText(`Source : HATVP open data · ${kpis.n_paires} paires · Licence Ouverte 2.0`, 60, 400);
     ctx.fillStyle="#000091"; ctx.font="700 16px Inter, sans-serif"; ctx.fillText("lemodelesocialfrancais.github.io/patrimoinoscope", 60, 580);
     ctx.fillStyle="#E1000F"; ctx.fillRect(1050, 560, 90, 10);
-    // download
     const a=document.createElement("a");
     a.download="patrimoinoscope-og.png";
     a.href=canvas.toDataURL("image/png");

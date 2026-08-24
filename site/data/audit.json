@@ -1,0 +1,1636 @@
+{
+  "total": 13330,
+  "by_type": {
+    "di": 6043,
+    "dia": 926,
+    "diam": 1361,
+    "dsp": 1052,
+    "dspm": 1185,
+    "dim": 2367,
+    "dspfm": 396
+  },
+  "by_mandat": {
+    "commune": 1296,
+    "epci": 2362,
+    "depute": 2575,
+    "departement": 3069,
+    "region": 1018,
+    "senateur": 2099,
+    "ctsp": 404,
+    "autre": 45,
+    "europe": 326,
+    "gouvernement": 134,
+    "president": 2
+  },
+  "by_statut": {
+    "Déclaration déposée - publication à venir": 2839,
+    "En cours": 1247,
+    "Livrée": 8878,
+    "Déclaration déposée - publication en préfecture à venir": 232,
+    "dispense": 130,
+    "Déclaration non déposée": 4
+  },
+  "sample": [
+    {
+      "prenom": "Abdel Kader",
+      "nom": "CHEKHEMANI",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdelatif",
+      "nom": "CHAARI",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdelaziz",
+      "nom": "HAMIDA",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdelaziz",
+      "nom": "HAMIDA",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdel-Kader",
+      "nom": "GUERZA",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdel-Kader",
+      "nom": "GUERZA",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdelkader",
+      "nom": "LAHMAR",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdelkader",
+      "nom": "LAHMAR",
+      "type_mandat": "depute",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "lahmar-abdelkader-dia31320-depute-69.xml"
+    },
+    {
+      "prenom": "Abdelkader",
+      "nom": "LAHMAR",
+      "type_mandat": "depute",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "lahmar-abdelkader-diam31323-depute-69.xml"
+    },
+    {
+      "prenom": "Abdelkader",
+      "nom": "LAHMAR",
+      "type_mandat": "depute",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "lahmar-abdelkader-dsp31970-depute-69.xml"
+    },
+    {
+      "prenom": "Abdelkader",
+      "nom": "LAHMAR",
+      "type_mandat": "depute",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "lahmar-abdelkader-dspm31971-depute-69.xml"
+    },
+    {
+      "prenom": "Abdelkrim",
+      "nom": "MARCHANI",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdel-Madjid",
+      "nom": "SADI",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Abdel-Madjid",
+      "nom": "SADI",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "sadi-abdel-madjid-di19909-departement-93.xml"
+    },
+    {
+      "prenom": "Adama",
+      "nom": "GAYE",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adama",
+      "nom": "GAYE",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adama",
+      "nom": "KANTÉ",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adam",
+      "nom": "BRASSART",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adam",
+      "nom": "BRASSART",
+      "type_mandat": "commune",
+      "type_document": "dim",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adèle",
+      "nom": "HOMMET-LELIEVRE",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "hommet-lelievre-adele-di29375-departement-50.xml"
+    },
+    {
+      "prenom": "Adèle",
+      "nom": "HOMMET-LELIEVRE",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "hommet-lelievre-adele-dim29376-departement-50.xml"
+    },
+    {
+      "prenom": "Adèle",
+      "nom": "ODON",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "odon-adele-di28007-departement-974.xml"
+    },
+    {
+      "prenom": "Adeline",
+      "nom": "ROLDAO-MARTINS",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adeline",
+      "nom": "YON-BERTHELOT",
+      "type_mandat": "region",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "yon-berthelot-adeline-di22613-region-53.xml"
+    },
+    {
+      "prenom": "Adel",
+      "nom": "ZIANE",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "ziane-adel-dia28557-senateur-93.xml"
+    },
+    {
+      "prenom": "Adel",
+      "nom": "ZIANE",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "ziane-adel-dsp28555-senateur-93.xml"
+    },
+    {
+      "prenom": "Adel",
+      "nom": "ZIANE",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "ziane-adel-dspm28556-senateur-93.xml"
+    },
+    {
+      "prenom": "Adji",
+      "nom": "AHOUDIAN",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adolphe",
+      "nom": "DIGOUÉ",
+      "type_mandat": "ctsp",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adrien",
+      "nom": "BARON",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adrien",
+      "nom": "BETOU",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adrien",
+      "nom": "MOTTAIS",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Adrien",
+      "nom": "NAIZET",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Afafe",
+      "nom": "RAFIKI",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agathe",
+      "nom": "BOURRETERE",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "bourretere-agathe-di21714-departement-40.xml"
+    },
+    {
+      "prenom": "Agathe",
+      "nom": "MOUGENOT",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "AMIEL",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "amiel-agnes-di20157-departement-13.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "AUDEGUIL",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "audeguil-agnes-di19943-departement-19.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "BERTRAND",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "BERTRAND",
+      "type_mandat": "commune",
+      "type_document": "dim",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "BOURGEAIS",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "BOURGEAIS",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CANAYER",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "canayer-agnes-dia30600-senateur-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CANAYER",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "canayer-agnes-diam30601-senateur-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CANAYER",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "canayer-agnes-dsp30608-senateur-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CANAYER",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "canayer-agnes-dspfm35500-senateur-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CANAYER",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "canayer-agnes-dspfm35501-senateur-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CAREL",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "CERCEL",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "EVREN",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "evren-agnes-dia28310-senateur-75.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "EVREN",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "evren-agnes-diam28312-senateur-75.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "EVREN",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "evren-agnes-dsp28309-senateur-75.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "EVREN",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "evren-agnes-dspm29710-senateur-75.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "FIRMIN LE BODO",
+      "type_mandat": "depute",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "firmin-le-bodo-agnes-dia30921-depute-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "FIRMIN LE BODO",
+      "type_mandat": "depute",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "firmin-le-bodo-agnes-diam30922-depute-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "FIRMIN LE BODO",
+      "type_mandat": "depute",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "firmin-le-bodo-agnes-dsp32355-depute-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "FIRMIN LE BODO",
+      "type_mandat": "depute",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "firmin-le-bodo-agnes-dspm32356-depute-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "JAUBERT",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "jaubert-agnes-di20574-departement-26.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "LANGEVINE",
+      "type_mandat": "region",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "langevine-agnes-di22582-region-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "LANGEVINE",
+      "type_mandat": "region",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "langevine-agnes-dim22583-region-76.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "PANNIER-RUNACHER",
+      "type_mandat": "depute",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "pannier-runacher-agnes-dia34763-depute-62.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "PANNIER-RUNACHER",
+      "type_mandat": "depute",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "pannier-runacher-agnes-diam34764-depute-62.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "PANNIER-RUNACHER",
+      "type_mandat": "depute",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "pannier-runacher-agnes-dsp34759-depute-62.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "PANNIER-RUNACHER",
+      "type_mandat": "depute",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "pannier-runacher-agnes-dspm34760-depute-62.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "POTTIER-DUMAS",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "POTTIER-DUMAS",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "pottier-dumas-agnes-di26113-departement-92.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "POTTIER-DUMAS",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "pottier-dumas-agnes-dim29302-departement-92.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "POTTIER-DUMAS",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "pottier-dumas-agnes-dim33927-departement-92.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "POTTIER-DUMAS",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "pottier-dumas-agnes-dim36002-departement-92.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "RAFAITIN",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "rafaitin-agnes-di20342-departement-95.xml"
+    },
+    {
+      "prenom": "Agnes",
+      "nom": "ROBIN",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "ROBLOT-TROIZIER",
+      "type_mandat": "autre",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "ROBLOT-TROIZIER",
+      "type_mandat": "autre",
+      "type_document": "dim",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "ROBLOT-TROIZIER",
+      "type_mandat": "autre",
+      "type_document": "dsp",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "ROBLOT-TROIZIER",
+      "type_mandat": "autre",
+      "type_document": "dspm",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "ROSSI",
+      "type_mandat": "region",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "rossi-agnes-di26926-region-93.xml"
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "SAURAT",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Agnès",
+      "nom": "THOUVENOT",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Ah Ky",
+      "nom": "TEMARII",
+      "type_mandat": "ctsp",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "temarii-ah-ky-di27962-ctsp-987.xml"
+    },
+    {
+      "prenom": "Ah Ky",
+      "nom": "TEMARII",
+      "type_mandat": "ctsp",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "temarii-ah-ky-dim27963-ctsp-987.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "HEDDADI",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-dia28402-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-diam28404-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-diam35059-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-diam35060-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-dsp28403-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Déclaration déposée - publication en préfecture à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-dspm28405-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-dspm35057-senateur-93.xml"
+    },
+    {
+      "prenom": "Ahmed",
+      "nom": "LAOUEDJ",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "laouedj-ahmed-dspm35058-senateur-93.xml"
+    },
+    {
+      "prenom": "Aïcha",
+      "nom": "BASSAL",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Aïcha",
+      "nom": "BASSAL",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "dispense",
+      "open_data": ""
+    },
+    {
+      "prenom": "Akli",
+      "nom": "MELLOULI",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "mellouli-akli-dia28413-senateur-94.xml"
+    },
+    {
+      "prenom": "Akli",
+      "nom": "MELLOULI",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "mellouli-akli-diam28568-senateur-94.xml"
+    },
+    {
+      "prenom": "Akli",
+      "nom": "MELLOULI",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "mellouli-akli-diam33069-senateur-94.xml"
+    },
+    {
+      "prenom": "Akli",
+      "nom": "MELLOULI",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "mellouli-akli-diam34045-senateur-94.xml"
+    },
+    {
+      "prenom": "Akli",
+      "nom": "MELLOULI",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "mellouli-akli-dsp28412-senateur-94.xml"
+    },
+    {
+      "prenom": "Akli",
+      "nom": "MELLOULI",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "mellouli-akli-dspm28414-senateur-94.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "ANCEAU",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "anceau-alain-di19352-departement-37.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "ANCEAU",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "anceau-alain-dim19354-departement-37.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "ANCEAU",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "anceau-alain-dim29214-departement-37.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "ANCEAU",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "anceau-alain-dim29215-departement-37.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "ANCEAU",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "anceau-alain-dim35816-departement-37.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "AUBRY",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "AUZEMERY",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "auzemery-alain-di25261-departement-87.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "AUZEMERY",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "auzemery-alain-dim25262-departement-87.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BACHÉ",
+      "type_mandat": "region",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "bache-alain-di21277-region-75.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BACHÉ",
+      "type_mandat": "region",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "bache-alain-dim21278-region-75.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BALLAND",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "balland-alain-di21848-departement-10.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BALLAND",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "balland-alain-dim21849-departement-10.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BARALE",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BARALE",
+      "type_mandat": "epci",
+      "type_document": "dim",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BARTHÉLÉMY",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BARTIER",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BATTAGLIA",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BAZILLE",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "bazille-alain-di26294-departement-76.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BAZILLE",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "bazille-alain-dim26295-departement-76.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BAZILLE",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "bazille-alain-dim26296-departement-76.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BÉCARD",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BECQUET",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BELLOC",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "belloc-alain-di25503-departement-82.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BLONDEAU",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BON",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "BRISSARD",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CADEC",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "cadec-alain-dia17275-senateur-22.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CADEC",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "cadec-alain-diam17276-senateur-22.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CADEC",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "cadec-alain-dsp17277-senateur-22.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CADEC",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "cadec-alain-dspfm35590-senateur-22.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CADEC",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "cadec-alain-dspfm35591-senateur-22.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CADEC",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "cadec-alain-dspm17278-senateur-22.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CARACO",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CARALP",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAYET",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAYMARIS",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAZABONNE",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "cazabonne-alain-dia17291-senateur-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAZABONNE",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "cazabonne-alain-diam17292-senateur-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAZABONNE",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "cazabonne-alain-dsp17290-senateur-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAZABONNE",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "cazabonne-alain-dspfm35597-senateur-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CAZABONNE",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "cazabonne-alain-dspfm35598-senateur-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHARRIER",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "charrier-alain-di21725-departement-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHATILLON",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "chatillon-alain-dia17318-senateur-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHATILLON",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "chatillon-alain-diam17323-senateur-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHATILLON",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "chatillon-alain-dsp17315-senateur-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHATILLON",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "chatillon-alain-dspfm35600-senateur-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHATILLON",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "chatillon-alain-dspfm35601-senateur-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CHRÉTIEN",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CONSTANT",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "COURANT",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CRÉMONT",
+      "type_mandat": "commune",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "CRÉMONT",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DARBON",
+      "type_mandat": "region",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "darbon-alain-di27665-region-75.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DARIO",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DAVID",
+      "type_mandat": "depute",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "david-alain-dia31312-depute-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DAVID",
+      "type_mandat": "depute",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "david-alain-diam31314-depute-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DAVID",
+      "type_mandat": "depute",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "david-alain-dsp32098-depute-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DAVID",
+      "type_mandat": "depute",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "david-alain-dspm32099-depute-33.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DE CARRION",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DELSAUX",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "delsaux-alain-di26919-departement-04.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DESFOSSES",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-dia17313-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-diam17314-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-diam17316-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-diam17810-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-diam20312-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-diam22740-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-diam34618-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-dsp17317-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-dspfm35504-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-dspfm35505-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-dspm17319-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "DUFFOURG",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "duffourg-alain-dspm34617-senateur-32.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "FERRAND",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "En cours",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GABRIELI",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "gabrieli-alain-di21139-departement-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GABRIELI",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "gabrieli-alain-dim25678-departement-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GABRIELI",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "gabrieli-alain-dim25679-departement-31.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GARGANI",
+      "type_mandat": "region",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "gargani-alain-di20655-region-93.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GARGANI",
+      "type_mandat": "region",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "gargani-alain-dim29928-region-93.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GINIES",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "ginies-alain-di33469-departement-11.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "GINIES",
+      "type_mandat": "departement",
+      "type_document": "dim",
+      "statut_publication": "Livrée",
+      "open_data": "ginies-alain-dim35054-departement-11.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HERTELOUP",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "herteloup-alain-di30469-departement-58.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HIPP",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HOUPERT",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "houpert-alain-dia17425-senateur-21.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HOUPERT",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "houpert-alain-diam17426-senateur-21.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HOUPERT",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "houpert-alain-dsp17427-senateur-21.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HOUPERT",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "houpert-alain-dspfm35708-senateur-21.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HOUPERT",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "houpert-alain-dspfm35709-senateur-21.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HOUPERT",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "houpert-alain-dspm24867-senateur-21.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "HUNAULT",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "IRIART",
+      "type_mandat": "epci",
+      "type_document": "di",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "dia",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-dia17451-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Déclaration déposée - publication à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-diam17452-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "diam",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-diam21128-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "dsp",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-dsp17449-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-dspfm35710-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "dspfm",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-dspfm35711-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Déclaration déposée - publication en préfecture à venir",
+      "open_data": ""
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYANDET",
+      "type_mandat": "senateur",
+      "type_document": "dspm",
+      "statut_publication": "Livrée",
+      "open_data": "joyandet-alain-dspm17450-senateur-70.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "JOYEUX",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "joyeux-alain-di27743-departement-86.xml"
+    },
+    {
+      "prenom": "Alain",
+      "nom": "LAMY",
+      "type_mandat": "departement",
+      "type_document": "di",
+      "statut_publication": "Livrée",
+      "open_data": "lamy-alain-di20103-departement-21.xml"
+    }
+  ],
+  "date": "2026-08-24"
+}

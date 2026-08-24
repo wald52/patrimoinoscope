@@ -1,4 +1,4 @@
-# raw data never committed (88MB)
+﻿# raw data never committed (88MB)
 data/raw/
 data/processed/*.parquet
 data/processed/*.xml
@@ -10,5 +10,4 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-!data/liste.csv
-!site/data/liste.csv
+
