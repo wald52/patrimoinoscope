@@ -334,7 +334,7 @@ function setupOG(){
     ctx.font="600 20px Inter, sans-serif"; ctx.fillStyle="#1a1a2e"; ctx.fillText(`Patrimoine net : ${fmtEur(kpis.entree_net_moyen)} → ${fmtEur(kpis.sortie_net_moyen)}`, 60, 290);
     ctx.fillStyle="#0a7d48"; ctx.font="800 36px Inter, sans-serif"; ctx.fillText(`Top : ${kpis.top_categorie} ${fmtEur(kpis.top_categorie_delta)}`, 60, 350);
     ctx.fillStyle="#6b6b7a"; ctx.font="500 18px Inter, sans-serif"; ctx.fillText(`Source : HATVP open data · ${kpis.n_paires} paires · Licence Ouverte 2.0`, 60, 400);
-    ctx.fillStyle="#000091"; ctx.font="700 16px Inter, sans-serif"; ctx.fillText("wald52.github.io/patrimoinoscope", 60, 580);
+    ctx.fillStyle="#000091"; ctx.font="700 16px Inter, sans-serif"; ctx.fillText("lemodelesocialfrancais.github.io/patrimoinoscope", 60, 580);
     ctx.fillStyle="#E1000F"; ctx.fillRect(1050, 560, 90, 10);
     // download
     const a=document.createElement("a");
